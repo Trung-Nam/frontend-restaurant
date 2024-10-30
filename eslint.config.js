@@ -7,9 +7,7 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 export default [
   {
     env: {
-      browser: true,
       node: true,
-      es6: true
     },
   },
   { ignores: ['dist'] },
