@@ -1,16 +1,11 @@
-import React from 'react';
-import img1 from '../../assets/images/home/category/img1.png';
-import img2 from '../../assets/images/home/category/img2.png';
-import img3 from '../../assets/images/home/category/img3.png';
-import img4 from '../../assets/images/home/category/img4.png';
+import React from 'react'
 
 const categoryItems = [
-    { id: 1, title: "Main Dish", description: "(86 dishes)", image: img1 },
-    { id: 2, title: "Break Fast", description: "(12 break fast)", image: img2 },
-    { id: 3, title: "Dessert", description: "(48 dessert)", image: img3 },
-    { id: 4, title: "Browse All", description: "(255 Items)", image: img4 }
-];
-
+    { id: 1, title: "Main Dish", description: "(86 dishes)", image: "/images/home/category/img1.png" },
+    { id: 2, title: "Break Fast", description: "(12 break fast)", image: "/images/home/category/img2.png" },
+    { id: 3, title: "Dessert", description: "(48 dessert)", image: "/images/home/category/img3.png" },
+    { id: 4, title: "Browse All", description: "(255 Items)", image: "/images/home/category/img4.png" }
+]
 const Categories = () => {
     return (
         <div className='section-container py-16'>

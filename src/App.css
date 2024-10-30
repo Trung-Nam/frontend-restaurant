@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
-
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
 body {
   font-family: "Inter", sans-serif;
 }
@@ -18,4 +19,8 @@ header {
 
 .title {
   @apply text-4xl md:text-5xl font-bold my-2 md:leading-snug leading-snug;
+}
+
+.heartStar {
+  border-radius: 0px 28px 0 28px;
 }
