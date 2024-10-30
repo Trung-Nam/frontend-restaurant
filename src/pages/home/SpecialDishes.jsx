@@ -87,7 +87,7 @@ const SpecialDishes = () => {
                 <h2 className='title md:w-[520px]'>Standout Dishes From Our Menu</h2>
             </div>
 
-            <div className='md:absolute right-3 top-0 mb-10 md:mr-24'>
+            <div className='md:absolute right-3 top-12 mb-10 md:mr-24'>
                 <button className='btn p-2 rounded-full ml-5' onClick={() => slider?.current?.slickPrev()}>
                     <FaAngleLeft className='w-8 h-8 p-1' />
                 </button>
@@ -96,7 +96,7 @@ const SpecialDishes = () => {
                 </button>
             </div>
 
-            <Slider ref={slider} {...settings} className='overflow-hidden mt-10 space-x-5'>
+            <Slider ref={slider} {...settings} className='overflow-hidden mt-10 space-x-5 w-100'>
                 {recipes.map((recipe, index) => (
                     <Card key={index} item={recipe} />
                 ))}
