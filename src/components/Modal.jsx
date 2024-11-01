@@ -1,21 +1,36 @@
-import React from 'react'
-import { FaFacebookF, FaGithub, FaGoogle } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { FaFacebookF, FaGithub, FaGoogle, FaRegUser } from 'react-icons/fa'; // Added FaRegUser for icon
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
-const Modal = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+const Modal = ({ isOpen, onClose }) => {
+    const { register, handleSubmit } = useForm();
     const onSubmit = data => console.log(data);
+    const navigate = useNavigate();
+    const [isSignin, setIsSignin] = useState(true);
 
+    // Close the modal and navigate to home
+    const closeModal = () => {
+        onClose(); // Call the onClose function from props
+        navigate('/'); // Navigate to home or any desired route
+    };
+
+    // Set default to sign-in when the modal opens
+    useEffect(() => {
+        if (isOpen) {
+            setIsSignin(true);
+            navigate('/signin'); // Optionally navigate to /signin
+        }
+    }, [isOpen, navigate]);
 
     return (
-        <dialog id="my_modal_5" className="modal modal-middle sm:modal-middle">
+        <dialog id="my_modal" className={`modal modal-middle sm:modal-middle ${isOpen ? 'open' : ''}`}>
             <div className="modal-box">
-
-
-                <div className="modal-action mt-0 flex-col">
-                    <form onSubmit={handleSubmit(onSubmit)} className="card-body" method='dialog' >
-                        <h1 className='font-bold text-2xl text-center'>Login</h1>
+                <div className="modal-action mt-0 flex flex-col justify-center">
+                    <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+                        <h1 className='font-bold text-2xl text-center'>
+                            {isSignin ? 'Sign in' : 'Create an account'}
+                        </h1>
 
                         <div className="form-control">
                             <label className="label">
@@ -28,7 +43,6 @@ const Modal = () => {
                                 required
                                 {...register("email")}
                             />
-
                         </div>
 
                         <div className="form-control">
@@ -50,20 +64,45 @@ const Modal = () => {
                         <div className="form-control mt-4">
                             <input
                                 type="submit"
-                                value="Login"
+                                value={isSignin ? "Sign In" : "Sign Up"}
                                 className="btn bg-primary text-white"
                             />
                         </div>
 
                         <p className="text-center my-2">
-                            Do not have an account?{" "}
-                            <Link to="/signup" className="underline text-soft-red ml-1">
-                                Signup
-                            </Link>{" "}
+                            {isSignin ? (
+                                <>
+                                    Don't have an account?
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            setIsSignin(false);
+                                            navigate('/signup');
+                                        }}
+                                        className="underline text-soft-red ml-1"
+                                    >
+                                        Sign Up
+                                    </button>
+                                </>
+                            ) : (
+                                <>
+                                    Already have an account?
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            setIsSignin(true);
+                                            navigate('/signin');
+                                        }}
+                                        className="underline text-soft-red ml-1"
+                                    >
+                                        Sign In
+                                    </button>
+                                </>
+                            )}
                         </p>
                     </form>
 
-                    {/* social sign in */}
+                    {/* Social sign in */}
                     <div className="text-center space-x-5 mb-5">
                         <button className="btn btn-circle hover:bg-primary hover:text-white">
                             <FaGoogle />
@@ -76,10 +115,17 @@ const Modal = () => {
                         </button>
                     </div>
 
+                    {/* Close button */}
+                    <button
+                        onClick={closeModal} // Close modal
+                        className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                    >
+                        ✕
+                    </button>
                 </div>
             </div>
         </dialog>
-    )
-}
+    );
+};
 
-export default Modal
+export default Modal;

@@ -4,6 +4,17 @@ import { FaRegUser } from "react-icons/fa";
 import Modal from './Modal';
 const Navbar = () => {
     const [isSticky, setIsSticky] = useState(false);
+    const [isOpen, setIsOpen] = useState(false); // State to manage modal visibility
+
+    const openModal = () => {
+        setIsOpen(true);
+        document.getElementById('my_modal').showModal()
+    } 
+    const closeModal = () => {
+        setIsOpen(false);
+        document.getElementById('my_modal').close()
+
+    }
 
     useEffect(() => {
         const handleScroll = () => {
@@ -143,13 +154,13 @@ const Navbar = () => {
                     {/* Contact */}
                     <button
                         className="btn bg-primary rounded-full px-6 text-white flex items-center gap-2"
-                        onClick={() => document.getElementById('my_modal_5').showModal()}
+                        onClick={openModal}
                     >
                         <FaRegUser />
                         Login
                     </button>
 
-                    <Modal/>
+                    <Modal isOpen={isOpen} onClose={closeModal}/>
                 </div>
             </div>
         </header>
