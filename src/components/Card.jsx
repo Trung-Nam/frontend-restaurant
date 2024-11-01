@@ -10,7 +10,7 @@ const Card = ({ item }) => {
     }
 
     return (
-        <div className="card shadow-xl relative mr-4 md:my-4">
+        <div className="card shadow-xl relative mx-2 md:my-4">
             <div
                 className={`rating gap-1 absolute right-2 top-2 p-4 heartStar bg-primary ${isHeartFilled ? "text-rose-500" : "text-white"
                     }`}
