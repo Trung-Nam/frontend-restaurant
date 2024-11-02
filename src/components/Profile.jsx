@@ -1,14 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { AuthContext } from '../contexts/AuthProvider';
 
 const Profile = ({ user }) => {
-    return (
-<div className="dropdown dropdown-end">
+  const { logout } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logout();
+  }
+  return (
+    <div className="dropdown dropdown-end">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
         <div className="w-10 rounded-full">
           <img
             alt="Profile Image"
-            src={user.photoURL ? user.photoURL : "https://i0.wp.com/digitalhealthskills.com/wp-content/uploads/2022/11/3da39-no-user-image-icon-27.png?fit=500%2C500&ssl=1" } 
-            />
+            src={user.photoURL ? user.photoURL : "https://i0.wp.com/digitalhealthskills.com/wp-content/uploads/2022/11/3da39-no-user-image-icon-27.png?fit=500%2C500&ssl=1"}
+          />
         </div>
       </div>
       <ul
@@ -22,10 +28,10 @@ const Profile = ({ user }) => {
         </li>
         <li><a>Order</a></li>
         <li><a>Settings</a></li>
-        <li><a>Logout</a></li>
+        <li><a onClick={handleLogout}>Logout</a></li>
       </ul>
     </div>
-    )
+  )
 }
 
 export default Profile

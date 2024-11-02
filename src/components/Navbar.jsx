@@ -6,9 +6,9 @@ import { AuthContext } from '../contexts/AuthProvider';
 import Profile from './Profile';
 const Navbar = () => {
     const [isSticky, setIsSticky] = useState(false);
-    const [isOpen, setIsOpen] = useState(false); // State to manage modal visibility
+    const [isOpen, setIsOpen] = useState(false);
     const { user } = useContext(AuthContext);
-    console.log(user);
+    // console.log(user);
 
 
     const openModal = () => {
