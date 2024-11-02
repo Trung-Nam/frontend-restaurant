@@ -1,15 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import logo from '../assets/images/logo.png';
 import { FaRegUser } from "react-icons/fa";
 import Modal from './Modal';
+import { AuthContext } from '../contexts/AuthProvider';
+import Profile from './Profile';
 const Navbar = () => {
     const [isSticky, setIsSticky] = useState(false);
     const [isOpen, setIsOpen] = useState(false); // State to manage modal visibility
+    const { user } = useContext(AuthContext);
+    console.log(user);
+
 
     const openModal = () => {
         setIsOpen(true);
         document.getElementById('my_modal').showModal()
-    } 
+    }
     const closeModal = () => {
         setIsOpen(false);
         document.getElementById('my_modal').close()
@@ -152,15 +157,22 @@ const Navbar = () => {
                         </div>
                     </div>
                     {/* Contact */}
-                    <button
-                        className="btn bg-primary rounded-full px-6 text-white flex items-center gap-2"
-                        onClick={openModal}
-                    >
-                        <FaRegUser />
-                        Login
-                    </button>
 
-                    <Modal isOpen={isOpen} onClose={closeModal}/>
+                    {
+                        user ?
+                            <Profile user={user} />
+                            :
+                            <button
+                                className="btn bg-primary rounded-full px-6 text-white flex items-center gap-2"
+                                onClick={openModal}
+                            >
+                                <FaRegUser />
+                                Login
+                            </button>
+                    }
+
+
+                    <Modal isOpen={isOpen} onClose={closeModal} />
                 </div>
             </div>
         </header>

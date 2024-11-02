@@ -1,18 +1,75 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FaFacebookF, FaGithub, FaGoogle, FaRegUser } from 'react-icons/fa'; // Added FaRegUser for icon
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from '../contexts/AuthProvider';
 
 const Modal = ({ isOpen, onClose }) => {
     const { register, handleSubmit } = useForm();
-    const onSubmit = data => console.log(data);
-    const navigate = useNavigate();
     const [isSignin, setIsSignin] = useState(true);
+
+    const { signUpWithGmail, login, createUser } = useContext(AuthContext);
+    const [errorMessage, setErrorMessage] = useState("");
+
+    // Redirect to home page 
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from?.pathname || "/";
+
+
+    const onSubmitSignIn = (data) => {
+        const { email, password } = data;
+        login(email, password)
+            .then((result) => {
+                // Signed in 
+                const user = result.user;
+                alert("Login successful!");
+                closeModal();
+               
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                setErrorMessage("Provide a correct email and password");
+            });
+    };
+
+    const onSubmitSignup = (data) => {
+        const { email, password } = data;
+        createUser(email, password)
+            .then((result) => {
+                // Signed up 
+                const user = result.user;
+                alert("Account creation successfully!");
+                closeModal();
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                setErrorMessage("Provide a correct email and password");
+            });
+
+    }
+
+    const handleLogin = () => {
+        signUpWithGmail()
+            .then((result) => {
+                const user = result.user;
+                alert("Login successful!");
+                closeModal();
+            }).catch((error) => {
+                console.log(error);
+
+            });
+    }
+
+
 
     // Close the modal and navigate to home
     const closeModal = () => {
         onClose(); // Call the onClose function from props
-        navigate('/'); // Navigate to home or any desired route
+        // navigate('/'); // Navigate to home or any desired route
+        navigate(from, { replace: true });
     };
 
     // Set default to sign-in when the modal opens
@@ -27,7 +84,7 @@ const Modal = ({ isOpen, onClose }) => {
         <dialog id="my_modal" className={`modal modal-middle sm:modal-middle ${isOpen ? 'open' : ''}`}>
             <div className="modal-box">
                 <div className="modal-action mt-0 flex flex-col justify-center">
-                    <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+                    <form onSubmit={handleSubmit(isSignin ? onSubmitSignIn : onSubmitSignup)} className="card-body">
                         <h1 className='font-bold text-2xl text-center'>
                             {isSignin ? 'Sign in' : 'Create an account'}
                         </h1>
@@ -60,6 +117,10 @@ const Modal = ({ isOpen, onClose }) => {
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label>
                         </div>
+
+                        {
+                            errorMessage ? <p className="text-soft-red text-xs italic">{errorMessage}</p> : ""
+                        }
 
                         <div className="form-control mt-4">
                             <input
@@ -104,7 +165,7 @@ const Modal = ({ isOpen, onClose }) => {
 
                     {/* Social sign in */}
                     <div className="text-center space-x-5 mb-5">
-                        <button className="btn btn-circle hover:bg-primary hover:text-white">
+                        <button className="btn btn-circle hover:bg-primary hover:text-white" onClick={handleLogin}>
                             <FaGoogle />
                         </button>
                         <button className="btn btn-circle hover:bg-primary hover:text-white">
