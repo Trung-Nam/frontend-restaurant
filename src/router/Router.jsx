@@ -5,6 +5,10 @@ import Menu from "../pages/shop/Menu";
 import Modal from "../components/Modal";
 import UpdateProfile from "../pages/dashboard/UpdateProfile";
 import CartPage from "../pages/shop/CartPage";
+import DashboardLayout from "../layout/DashboardLayout";
+import Dashboard from "../pages/dashboard/admin/Dashboard";
+import Users from "../pages/dashboard/admin/Users";
+
 
 const router = createBrowserRouter([
     {
@@ -28,7 +32,7 @@ const router = createBrowserRouter([
             {
                 path: "/menu",
                 element: <Menu />,
-                
+
             },
             {
                 path: "/update-profile",
@@ -41,6 +45,20 @@ const router = createBrowserRouter([
 
         ]
     },
+    {
+        path: "/dashboard",
+        element: <DashboardLayout />,
+        children: [
+            {
+                path:"admin",
+                element: <Dashboard/>
+            },
+            {
+                path:"users",
+                element: <Users/>
+            }
+        ]
+    }
 
 ]);
 
