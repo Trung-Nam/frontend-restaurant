@@ -3,11 +3,13 @@ import Main from "../layout/Main";
 import Home from "../pages/home/Home";
 import Menu from "../pages/shop/Menu";
 import Modal from "../components/Modal";
-import UpdateProfile from "../pages/dashboard/UpdateProfile";
 import CartPage from "../pages/shop/CartPage";
 import DashboardLayout from "../layout/DashboardLayout";
 import Dashboard from "../pages/dashboard/admin/Dashboard";
 import Users from "../pages/dashboard/admin/Users";
+import UserProfile from "../pages/dashboard/UserProfile";
+import Login from "../components/Login";
+import Register from "../components/Register";
 
 
 const router = createBrowserRouter([
@@ -18,16 +20,6 @@ const router = createBrowserRouter([
             {
                 path: "/",
                 element: <Home />,
-                children: [
-                    {
-                        path: "/signin",
-                        element: <Modal />
-                    },
-                    {
-                        path: "/signup",
-                        element: <Modal />
-                    },
-                ]
             },
             {
                 path: "/menu",
@@ -35,27 +27,34 @@ const router = createBrowserRouter([
 
             },
             {
-                path: "/update-profile",
-                element: <UpdateProfile />
+                path: "/user-profile",
+                element: <UserProfile />
             },
             {
                 path: "/cart-page",
                 element: <CartPage />
             },
-
         ]
+    },
+    {
+        path: "/login",
+        element: <Login />
+    },
+    {
+        path: "/register",
+        element: <Register />
     },
     {
         path: "/dashboard",
         element: <DashboardLayout />,
         children: [
             {
-                path:"admin",
-                element: <Dashboard/>
+                path: "admin",
+                element: <Dashboard />
             },
             {
-                path:"users",
-                element: <Users/>
+                path: "users",
+                element: <Users />
             }
         ]
     }

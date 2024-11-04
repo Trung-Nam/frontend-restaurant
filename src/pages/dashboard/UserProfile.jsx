@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form"
 import { AuthContext } from '../../contexts/AuthProvider'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-const UpdateProfile = () => {
+const UserProfile = () => {
     const { updateUserProfile } = useContext(AuthContext)
     const {
         register,
@@ -61,4 +61,4 @@ const UpdateProfile = () => {
     )
 }
 
-export default UpdateProfile
+export default UserProfile

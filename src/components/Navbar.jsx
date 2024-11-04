@@ -1,27 +1,15 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import logo from '../assets/images/logo.png';
 import { FaRegUser } from "react-icons/fa";
-import Modal from './Modal';
-import { AuthContext } from '../contexts/AuthProvider';
+
 import Profile from './Profile';
 import { Link } from 'react-router-dom';
 import useCart from '../hooks/useCart';
+import useAuth from '../hooks/useAuth'
 const Navbar = () => {
     const [isSticky, setIsSticky] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
-    const { user } = useContext(AuthContext);
+    const { user } = useAuth();
     const [carts, refetch] = useCart();
-
-
-    const openModal = () => {
-        setIsOpen(true);
-        document.getElementById('my_modal').showModal()
-    }
-    const closeModal = () => {
-        setIsOpen(false);
-        document.getElementById('my_modal').close()
-
-    }
 
     useEffect(() => {
         const handleScroll = () => {
@@ -166,17 +154,15 @@ const Navbar = () => {
                         user ?
                             <Profile user={user} />
                             :
-                            <button
+                            <Link
+                                to="/login"
                                 className="btn bg-primary rounded-full px-6 text-white flex items-center gap-2"
-                                onClick={openModal}
                             >
                                 <FaRegUser />
                                 Login
-                            </button>
+                            </Link>
                     }
 
-
-                    <Modal isOpen={isOpen} onClose={closeModal} />
                 </div>
             </div>
         </header>

@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react'
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from "../firebase/firebase.config"
+import axios from 'axios';
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
@@ -17,7 +18,7 @@ const AuthProvider = ({ children }) => {
     }
 
     // signup with gmail
-    const signUpWithGmail = () => {
+    const signInWithGmail = () => {
         return signInWithPopup(auth, googleProvider);
     }
 
@@ -39,19 +40,29 @@ const AuthProvider = ({ children }) => {
     }
 
     // check signed-in user
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            if (currentUser) {
-                setUser(currentUser);
-                setLoading(false);
-            } else {
-                setUser(null);
-                setLoading(false);
+    useEffect( () =>{
+        const unsubscribe = onAuthStateChanged(auth, currentUser =>{
+            // console.log(currentUser);
+            setUser(currentUser);
+            if(currentUser){
+                const userInfo ={email: currentUser.email}
+                axios.post('http://localhost:6001/jwt', userInfo)
+                  .then( (response) => {
+                    // console.log(response.data.token);
+                    if(response.data.token){
+                        localStorage.setItem("access-token", response.data.token)
+                    }
+                  })
+            } else{
+               localStorage.removeItem("access-token")
             }
-          });
-          return () => {
+           
+            setLoading(false);
+        });
+
+        return () =>{
             return unsubscribe();
-          }
+        }
     }, [])
     
 
@@ -60,7 +71,7 @@ const AuthProvider = ({ children }) => {
         user,
         loading,
         createUser,
-        signUpWithGmail,
+        signInWithGmail,
         login,
         logout,
         updateUserProfile

@@ -3,13 +3,15 @@ import { FaFacebookF, FaGithub, FaGoogle, FaRegUser } from 'react-icons/fa'; // 
 import { useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from '../contexts/AuthProvider';
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const Modal = ({ isOpen, onClose }) => {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset } = useForm();
     const [isSignin, setIsSignin] = useState(true);
 
-    const { signUpWithGmail, login, createUser } = useContext(AuthContext);
+    const { signUpWithGmail, login, createUser, updateUserProfile } = useContext(AuthContext);
     const [errorMessage, setErrorMessage] = useState("");
+    const axiosPublic = useAxiosPublic();
 
     // Redirect to home page 
     const location = useLocation();
@@ -23,15 +25,25 @@ const Modal = ({ isOpen, onClose }) => {
             .then((result) => {
                 // Signed in 
                 const user = result.user;
-                alert("Login successful!");
+
+                const userInfo = {
+                    name: data.name,
+                    email: data.email,
+                };
+                axiosPublic
+                    .post("/users", userInfo)
+                    .then((response) => {
+                        // console.log(response);
+                        alert("Login successful!");
+                    });
                 closeModal();
-               
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 setErrorMessage("Provide a correct email and password");
             });
+        reset();
     };
 
     const onSubmitSignup = (data) => {
@@ -40,30 +52,47 @@ const Modal = ({ isOpen, onClose }) => {
             .then((result) => {
                 // Signed up 
                 const user = result.user;
-                alert("Account creation successfully!");
-                closeModal();
+                updateUserProfile(data.email, data.photoURL).then(() => {
+                    const userInfo = {
+                        name: data.name,
+                        email: data.email,
+                    };
+                    axiosPublic
+                        .post("/users", userInfo)
+                        .then((response) => {
+                            // console.log(response);
+                            alert("Account creation successfully!");
+                            closeModal();
+                        });
+                });
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 setErrorMessage("Provide a correct email and password");
             });
-
+        reset();
     }
 
+    // login with google
     const handleLogin = () => {
         signUpWithGmail()
             .then((result) => {
                 const user = result.user;
-                alert("Login successful!");
-                closeModal();
-            }).catch((error) => {
-                console.log(error);
-
-            });
-    }
-
-
+                const userInfo = {
+                    name: result?.user?.displayName,
+                    email: result?.user?.email,
+                };
+                axiosPublic
+                    .post("/users", userInfo)
+                    .then((response) => {
+                        // console.log(response);
+                        alert("Login successful!");
+                        closeModal();
+                    });
+            })
+            .catch((error) => console.log(error));
+    };
 
     // Close the modal and navigate to home
     const closeModal = () => {
@@ -88,7 +117,20 @@ const Modal = ({ isOpen, onClose }) => {
                         <h1 className='font-bold text-2xl text-center'>
                             {isSignin ? 'Sign in' : 'Create an account'}
                         </h1>
-
+                        {/* name */}
+                        {!isSignin &&
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Name</span>
+                                </label>
+                                <input
+                                    type="name"
+                                    placeholder="Your name"
+                                    className="input input-bordered"
+                                    {...register("name")}
+                                />
+                            </div>
+                        }
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
@@ -184,8 +226,8 @@ const Modal = ({ isOpen, onClose }) => {
                         ✕
                     </button>
                 </div>
-            </div>
-        </dialog>
+            </div >
+        </dialog >
     );
 };
 
