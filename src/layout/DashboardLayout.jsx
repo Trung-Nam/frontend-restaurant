@@ -82,7 +82,7 @@ const DashboardLayout = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/admin">
+                  <Link to="/dashboard/manage-items">
                     <MdOutlineBorderColor />
                     Mange Items
                   </Link>
