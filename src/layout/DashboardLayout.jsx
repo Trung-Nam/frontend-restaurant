@@ -36,7 +36,7 @@ const DashboardLayout = () => {
         isAdmin ? (
           <div className="drawer lg:drawer-open" >
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content flex flex-col sm:items-start sm:justify-start py-4">
+            <div className="drawer-content flex flex-col sm:items-center sm:justify-start py-4">
               {/* Page content here */}
               <div className="flex items-center justify-between mx-4">
                 <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">
@@ -76,13 +76,13 @@ const DashboardLayout = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/admin">
+                  <Link to="/dashboard/add-menu">
                     <MdOutlinePostAdd />
                     Add Menu
                   </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/admin">
+                  <Link to="/dashboard/manage-items">
                     <MdOutlineBorderColor />
                     Mange Items
                   </Link>
