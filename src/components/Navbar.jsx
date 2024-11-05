@@ -10,6 +10,9 @@ const Navbar = () => {
     const [isSticky, setIsSticky] = useState(false);
     const { user } = useAuth();
     const [carts, refetch] = useCart();
+    const [activeItem, setActiveItem] = useState('Home');
+
+
 
     useEffect(() => {
         const handleScroll = () => {
@@ -29,19 +32,28 @@ const Navbar = () => {
         }
     }, [])
 
+    const handleItemClick = (item) => {
+        setActiveItem(item);
+    };
 
     const navItems = (
         <>
-            <li>
-                <a href="/">Home</a>
+            <li className={activeItem === 'Home' ? 'active' : ''}>
+                <a href="/" onClick={() => handleItemClick('Home')}>Home</a>
             </li>
             <li tabIndex={0}>
                 <details>
                     <summary>Menu</summary>
                     <ul className="p-2">
-                        <li><a href="/menu">All</a></li>
-                        <li><a>Salad</a></li>
-                        <li><a>Pizza</a></li>
+                        <li>
+                            <a href="/menu" onClick={() => handleItemClick('Menu')}>All</a>
+                        </li>
+                        <li>
+                            <a onClick={() => handleItemClick('Salad')}>Salad</a>
+                        </li>
+                        <li>
+                            <a onClick={() => handleItemClick('Pizza')}>Pizza</a>
+                        </li>
                     </ul>
                 </details>
             </li>
@@ -49,17 +61,23 @@ const Navbar = () => {
                 <details>
                     <summary>Services</summary>
                     <ul className="p-2">
-                        <li><a>Online Order</a></li>
-                        <li><a>Table Booking</a></li>
-                        <li><a>Order Tracking</a></li>
+                        <li>
+                            <a onClick={() => handleItemClick('Online Order')}>Online Order</a>
+                        </li>
+                        <li>
+                            <a onClick={() => handleItemClick('Table Booking')}>Table Booking</a>
+                        </li>
+                        <li>
+                            <a onClick={() => handleItemClick('Order Tracking')}>Order Tracking</a>
+                        </li>
                     </ul>
                 </details>
             </li>
-            <li>
-                <a>Offers</a>
+            <li className={activeItem === 'Offers' ? 'active' : ''}>
+                <a onClick={() => handleItemClick('Offers')}>Offers</a>
             </li>
         </>
-    )
+    );
     return (
         <header className='max-w-screen-2xl container mx-auto 
         fixed top-0 left-0 right-0
@@ -132,17 +150,6 @@ const Navbar = () => {
                                                 d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                                         </svg>
                                         <span className="badge badge-sm indicator-item">{carts?.length || 0}</span>
-                                    </div>
-                                </div>
-                                <div
-                                    tabIndex={0}
-                                    className="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-52 shadow">
-                                    <div className="card-body">
-                                        <span className="text-lg font-bold">8 Items</span>
-                                        <span className="text-info">Subtotal: $999</span>
-                                        <div className="card-actions">
-                                            <button className="btn btn-primary btn-block">View cart</button>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
