@@ -12,7 +12,7 @@ const CartPage = () => {
         return item.price * item.quantity;
     }
 
-    const cartSubTotal = carts.reduce((total, item) => {
+    const cartSubTotal = carts?.reduce((total, item) => {
         return total + calculatePrice(item);
     }, 0);
 
@@ -151,7 +151,7 @@ const CartPage = () => {
                                             <div className="avatar">
                                                 <div className="mask mask-squircle h-12 w-12">
                                                     <img
-                                                        src={item.image}
+                                                        src={item?.image}
                                                         alt="item-image" />
                                                 </div>
                                             </div>
@@ -168,7 +168,7 @@ const CartPage = () => {
                                             type="number"
                                             value={item.quantity}
                                             className='w-10 mx-2 text-center overflow-hidden text-xl'
-                                            onChange={() => console.log(item.quantity)}
+                                            onChange={() => console.log(item?.quantity)}
                                         />
                                         <button className="btn btn-md" onClick={() => handleIncrease(item)}>+</button>
                                     </td>
@@ -203,15 +203,15 @@ const CartPage = () => {
                     <tbody>
                         <tr>
                             <td className="border border-gray-300 px-4 py-2">Customer Name</td>
-                            <td className="border border-gray-300 px-4 py-2">{user.displayName}</td>
+                            <td className="border border-gray-300 px-4 py-2">{user?.displayName}</td>
                         </tr>
                         <tr>
                             <td className="border border-gray-300 px-4 py-2">Customer Email</td>
-                            <td className="border border-gray-300 px-4 py-2">{user.email}</td>
+                            <td className="border border-gray-300 px-4 py-2">{user?.email}</td>
                         </tr>
                         <tr>
                             <td className="border border-gray-300 px-4 py-2">Total Items</td>
-                            <td className="border border-gray-300 px-4 py-2">{carts.length}</td>
+                            <td className="border border-gray-300 px-4 py-2">{carts?.length}</td>
                         </tr>
                         <tr>
                             <td className="border border-gray-300 px-4 py-2">Total Price</td>
