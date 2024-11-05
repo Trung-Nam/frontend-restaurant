@@ -1,11 +1,12 @@
 import React, { useContext } from 'react'
 import { AuthContext } from '../contexts/AuthProvider';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 const Profile = ({ user }) => {
   const { logout } = useContext(AuthContext);
-
+  const navigate = useNavigate();
   const handleLogout = () => {
     logout();
+    navigate('/');
   }
   return (
     <div className="dropdown dropdown-end">

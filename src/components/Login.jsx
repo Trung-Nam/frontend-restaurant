@@ -27,8 +27,7 @@ const Login = () => {
         const { email, password } = data;
         login(email, password)
             .then((result) => {
-                console.log(result);
-                
+                // console.log(result);                
                 alert("Login successful!");
                 navigate("/");
             })
@@ -44,16 +43,18 @@ const Login = () => {
         signInWithGmail()
             .then((result) => {
                 const user = result.user;
-                const userInfo = {
-                    name: result?.user?.displayName,
-                    email: result?.user?.email,
-                };
-                axiosPublic
-                    .post("/users", userInfo)
-                    .then((response) => {
-                        // console.log(response);
-                        alert("Login successful!");
-                    });
+                console.log(user);
+                
+                // const userInfo = {
+                //     name: result?.user?.displayName,
+                //     email: result?.user?.email,
+                // };
+                // axiosPublic
+                //     .post("/users", userInfo)
+                //     .then((response) => {
+                //         console.log(response);
+                //         alert("Login successful!");
+                //     });
                 navigate("/");
             })
             .catch((error) => console.log(error));

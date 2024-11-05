@@ -1,50 +1,102 @@
-import React, { useContext, useState } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import React, { useContext, useState } from "react";
 import { FaHeart } from "react-icons/fa";
-import { AuthContext } from '../contexts/AuthProvider';
-import { toast } from 'react-toastify';
-const Card = ({ item }) => {
-    const [isHeartFilled, setIsHeartFilled] = useState(false);
-    const { user } = useContext(AuthContext);
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthProvider";
+import Swal from 'sweetalert2'
+import useCart from "../hooks/useCart";
+import axios from 'axios';
 
+const Cards = ({ item }) => {
+    const { name, image, price, recipe, _id } = item;
+
+    const { user } = useContext(AuthContext);
+    const [cart, refetch] = useCart();
     const navigate = useNavigate();
     const location = useLocation();
+    // console.log(item)
+    const [isHeartFilled, setIsHeartFilled] = useState(false);
 
     const handleHeartClick = () => {
         setIsHeartFilled(!isHeartFilled);
-    }
+    };
 
-    const handleAddToCart = (item) => {
+    // add to cart handler
+    const handleAddToCart = () => {
         // console.log(item);
-        if (user && user?.email) {
-            const cartItem = {
-                menuId: item._id,
-                name: item.name,
-                quantity: 1,
-                image: item.image,
-                price: item.price,
-                email: user.email
-            }
-            fetch('http://localhost:6001/carts', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(cartItem)
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    if (data.insertedId) {
-                        toast.success("Add to cart successfully!");
+        if (user && user.email) {
+            const cartItem = { menuItemId: _id, name, quantity: 1, image, price, email: user.email }
+
+            axios.post('http://localhost:6001/carts', cartItem)
+                .then((response) => {
+                    console.log(response);
+                    if (response) {
+                        refetch(); // refetch cart
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Food added on the cart.',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
                     }
                 })
+                .catch((error) => {
+                    console.log(error.response.data.message);
+                    const errorMessage = error.response.data.message;
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'warning',
+                        title: `${errorMessage}`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                });
+        }
+        else {
+            Swal.fire({
+                title: 'Please login to order the food',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '',
+                confirmButtonText: 'Login now!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate('/login', { state: { from: location } })
+                }
+            })
 
-        } else {
-            toast.error("Please Sign In before order !!!");
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: "btn bg-primary text-white",
+                    cancelButton: "btn bg-[#d33] text-white mr-4"
+                },
+                buttonsStyling: false
+            });
+            swalWithBootstrapButtons.fire({
+                title: "LOGIN NOW!!!",
+                text: "Please Login To Order The Food!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes, Login now!",
+                cancelButtonText: "No, cancel!",
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate('/login', { state: { from: location } })
+                } else if (
+                    /* Read more about handling dismissals below */
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire({
+                        title: "Cancelled",
+                        text: "Oh no :)",
+                        icon: "error"
+                    });
+                }
+            });
         }
     }
-
 
     return (
         <div className="card shadow-xl relative mx-2 md:my-4">
@@ -77,7 +129,7 @@ const Card = ({ item }) => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Card
+export default Cards;
