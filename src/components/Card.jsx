@@ -1,31 +1,31 @@
-import React, { useContext, useState } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import React, { useContext, useState } from "react";
 import { FaHeart } from "react-icons/fa";
-import { AuthContext } from '../contexts/AuthProvider';
-import { toast } from 'react-toastify';
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthProvider";
+import Swal from 'sweetalert2'
+import useCart from "../hooks/useCart";
 import axios from 'axios';
-const Card = ({ item }) => {
-    const [isHeartFilled, setIsHeartFilled] = useState(false);
-    const { user } = useContext(AuthContext);
 
+const Cards = ({ item }) => {
+    const { name, image, price, recipe, _id } = item;
+
+    const { user } = useContext(AuthContext);
+    const [cart, refetch] = useCart();
     const navigate = useNavigate();
     const location = useLocation();
+    // console.log(item)
+    const [isHeartFilled, setIsHeartFilled] = useState(false);
 
     const handleHeartClick = () => {
         setIsHeartFilled(!isHeartFilled);
-    }
+    };
 
-    const handleAddToCart = (item) => {
+    // add to cart handler
+    const handleAddToCart = () => {
         // console.log(item);
-        if (user && user?.email) {
-            const cartItem = {
-                menuId: item._id,
-                name: item.name,
-                quantity: 1,
-                image: item.image,
-                price: item.price,
-                email: user.email
-            }
+        if (user && user.email) {
+            const cartItem = { menuItemId: _id, name, quantity: 1, image, price, email: user.email }
+
             axios.post('http://localhost:6001/carts', cartItem)
                 .then((response) => {
                     console.log(response);
@@ -98,7 +98,6 @@ const Card = ({ item }) => {
         }
     }
 
-
     return (
         <div className="card shadow-xl relative mx-2 md:my-4">
             <div
@@ -130,7 +129,7 @@ const Card = ({ item }) => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Card
+export default Cards;
