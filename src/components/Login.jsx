@@ -4,6 +4,7 @@ import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import useAuth from "../hooks/useAuth";
+import { toast } from "react-toastify"
 
 const Login = () => {
     const [errorMessage, setErrorMessage] = useState("");
@@ -28,11 +29,10 @@ const Login = () => {
         login(email, password)
             .then((result) => {
                 // console.log(result);                
-                alert("Login successful!");
-                navigate("/");
+                navigate("/", { state: { message: '🦄 Login successful!' } });
             })
             .catch((error) => {
-                const errorMessage = error.message;
+                // const errorMessage = error.message;
                 setErrorMessage("Please provide valid email & password!");
             });
         reset()
@@ -42,9 +42,9 @@ const Login = () => {
     const handleLoginWithGoogle = () => {
         signInWithGmail()
             .then((result) => {
-                const user = result.user;
-                console.log(user);
-                
+                // const user = result.user;
+                // console.log(user);
+
                 // const userInfo = {
                 //     name: result?.user?.displayName,
                 //     email: result?.user?.email,
@@ -55,7 +55,7 @@ const Login = () => {
                 //         console.log(response);
                 //         alert("Login successful!");
                 //     });
-                navigate("/");
+                navigate("/", { state: { message: '🦄 Login successful!' } });
             })
             .catch((error) => console.log(error));
     };
