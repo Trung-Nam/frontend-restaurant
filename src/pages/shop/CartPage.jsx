@@ -3,6 +3,8 @@ import useCart from '../../hooks/useCart';
 import { FaTrash } from 'react-icons/fa';
 import Swal from 'sweetalert2'
 import { AuthContext } from '../../contexts/AuthProvider';
+import { Link } from "react-router-dom"
+
 const CartPage = () => {
     const [carts, refetch] = useCart();
     const { user } = useContext(AuthContext);
@@ -219,7 +221,10 @@ const CartPage = () => {
                         </tr>
                     </tbody>
                 </table>
-                <button className="btn bg-primary text-white mt-4">Processed Checkout</button>
+                <Link to="/process-checkout">
+
+                    <button className="btn bg-primary text-white mt-4">Processed Checkout</button>
+                </Link>
             </div>
 
         </div>
