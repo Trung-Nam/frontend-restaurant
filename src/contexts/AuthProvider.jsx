@@ -36,35 +36,63 @@ const AuthProvider = ({ children }) => {
     const updateUserProfile = (name, photoURL) => {
         return updateProfile(auth.currentUser, {
             displayName: name, photoURL: photoURL
-          })
+        })
     }
 
     // check signed-in user
-    useEffect( () =>{
-        const unsubscribe = onAuthStateChanged(auth, currentUser =>{
-            // console.log(currentUser);
-            setUser(currentUser);
-            if(currentUser){
-                const userInfo ={email: currentUser.email}
-                axios.post('http://localhost:6001/jwt', userInfo)
-                  .then( (response) => {
-                    // console.log(response.data.token);
-                    if(response.data.token){
-                        localStorage.setItem("access-token", response.data.token)
-                    }
-                  })
-            } else{
-               localStorage.removeItem("access-token")
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+            setLoading(true); // Set loading to true while fetching data
+            if (currentUser) {
+                const userInfo = { email: currentUser.email };
+
+                // Fetch or set JWT token for API requests
+                const tokenResponse = await fetch('http://localhost:6001/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(userInfo),
+                });
+                const tokenData = await tokenResponse.json();
+
+                if (tokenData.token) {
+                    localStorage.setItem("access-token", tokenData.token);
+                }
+
+                // Use the token to authenticate and fetch user data from your database
+                const dbUserResponse = await fetch(`http://localhost:6001/users/admin/${currentUser.email}`, {
+                    headers: {
+                        method: 'GET',
+                        'Authorization': `Bearer ${tokenData.token}`,
+                        'Content-Type': 'application/json'
+                    },
+                });
+                const dbUserData = await dbUserResponse.json();
+
+                // Combine Firebase and database user data
+                const combinedUserData = {
+                    name:currentUser.displayName,
+                    email:currentUser.email,
+                    role:dbUserData.admin === true ? 'admin' :'user'
+                };
+                // console.log(currentUser);
+                
+                // console.log(combinedUserData);
+
+                setUser(combinedUserData);
+            } else {
+                localStorage.removeItem("access-token");
+                setUser(null);
             }
-           
+
             setLoading(false);
         });
 
-        return () =>{
-            return unsubscribe();
-        }
-    }, [])
-    
+        return () => unsubscribe();
+    }, []);
+
+
 
 
     const authInfo = {

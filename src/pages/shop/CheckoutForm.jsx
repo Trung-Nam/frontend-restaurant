@@ -68,7 +68,7 @@ const CheckoutForm = ({ cart, price }) => {
                 payment_method: {
                     card: card,
                     billing_details: {
-                        name: user?.displayName || 'anonymous',
+                        name: user?.name || 'anonymous',
                         email: user?.email || 'unknown'
                     },
                 },

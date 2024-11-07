@@ -1,10 +1,9 @@
 import React, { useContext } from 'react'
 import { AuthContext } from '../contexts/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
-import useAdmin from '../hooks/useAdmin';
 const Profile = ({ user }) => {
   const { logout } = useContext(AuthContext);
-  const [isAdmin] = useAdmin();
+
 
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -32,7 +31,7 @@ const Profile = ({ user }) => {
         </li>
         <li><a href='/order'>Order</a></li>
         {/* <li><a>Settings</a></li> */}
-        {isAdmin &&
+        {user.role === 'admin' &&
           <li>
             <Link to="/dashboard/admin">Dashboard</Link>
           </li>

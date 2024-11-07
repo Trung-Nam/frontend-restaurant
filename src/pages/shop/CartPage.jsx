@@ -207,7 +207,7 @@ const CartPage = () => {
                                 <tbody>
                                     <tr>
                                         <td className="border border-gray-300 px-4 py-2">Customer Name</td>
-                                        <td className="border border-gray-300 px-4 py-2">{user?.displayName}</td>
+                                        <td className="border border-gray-300 px-4 py-2">{user?.name}</td>
                                     </tr>
                                     <tr>
                                         <td className="border border-gray-300 px-4 py-2">Customer Email</td>

@@ -12,6 +12,7 @@ const Navbar = () => {
     const [carts, refetch] = useCart();
     const [activeItem, setActiveItem] = useState('Home');
 
+    // console.log("user: ",user);
 
 
     useEffect(() => {
@@ -41,22 +42,10 @@ const Navbar = () => {
             <li className={activeItem === 'Home' ? 'active' : ''}>
                 <a href="/" onClick={() => handleItemClick('Home')}>Home</a>
             </li>
-            <li tabIndex={0}>
-                <details>
-                    <summary>Menu</summary>
-                    <ul className="p-2">
-                        <li>
-                            <a href="/menu" onClick={() => handleItemClick('Menu')}>All</a>
-                        </li>
-                        <li>
-                            <a onClick={() => handleItemClick('Salad')}>Salad</a>
-                        </li>
-                        <li>
-                            <a onClick={() => handleItemClick('Pizza')}>Pizza</a>
-                        </li>
-                    </ul>
-                </details>
+            <li className={activeItem === 'Menu' ? 'active' : ''}>
+                <a href="/menu" onClick={() => handleItemClick('Menu')}>Menu</a>
             </li>
+
             <li tabIndex={0}>
                 <details>
                     <summary>Services</summary>

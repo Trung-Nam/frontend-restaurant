@@ -1,21 +1,15 @@
 import React, { useContext } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaFacebookF, FaGithub, FaGoogle, FaRegUser } from "react-icons/fa";
 import { useForm } from "react-hook-form";
-import Modal from "./Modal";
 import { AuthContext } from "../contexts/AuthProvider";
-import axios from "axios";
 import useAxiosPublic from "../hooks/useAxiosPublic";
-
 const Register = () => {
   const { signUpWithGmail, createUser, updateUserProfile } =
     useContext(AuthContext);
-    const axiosPublic = useAxiosPublic();
+  const axiosPublic = useAxiosPublic();
 
   const navigate = useNavigate();
-  const location = useLocation();
-
-  const from = location.state?.from?.pathname || "/";
 
   const {
     register,
@@ -39,15 +33,14 @@ const Register = () => {
           axiosPublic.post("/users", userInfo)
             .then((response) => {
               // console.log(response);
-              alert("Register successful!");
-              navigate(from, { replace: true });
+              navigate("/", { state: { message: '🦄 Create account successful!' } });
             });
         });
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        // ..
+        console.log(errorMessage);
       });
   };
 
@@ -63,9 +56,7 @@ const Register = () => {
         axiosPublic
           .post("/users", userInfo)
           .then((response) => {
-            // console.log(response);
-            alert("Register successful!");
-            navigate("/");
+            navigate("/", { state: { message: '🦄 Create account successful!' } });
           });
       })
       .catch((error) => console.log(error));
