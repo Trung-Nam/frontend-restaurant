@@ -12,6 +12,8 @@ import AddMenu from "../pages/dashboard/admin/AddMenu";
 import ManageItems from "../pages/dashboard/admin/ManageItems";
 import UpdateMenu from "../pages/dashboard/admin/UpdateMenu";
 import App from "../App";
+import Payment from "../pages/shop/Payment";
+import Order from "../pages/dashboard/Order";
 
 
 const router = createBrowserRouter([
@@ -36,6 +38,14 @@ const router = createBrowserRouter([
                 path: "/cart-page",
                 element: <CartPage />
             },
+            {
+                path: "/process-checkout",
+                element: <Payment />
+            },
+            {
+                path: "/order",
+                element: <Order />
+            }
         ]
     },
     {
@@ -70,7 +80,8 @@ const router = createBrowserRouter([
                 path: "update-menu/:id",
                 element: <UpdateMenu />,
                 loader: ({ params }) => fetch(`http://localhost:6001/menu/${params.id}`)
-            }
+            },
+
         ]
     }
 

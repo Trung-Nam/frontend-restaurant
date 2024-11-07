@@ -27,7 +27,7 @@ const Profile = ({ user }) => {
             <span className="badge">New</span>
           </a>
         </li>
-        <li><a>Order</a></li>
+        <li><a href='/order'>Order</a></li>
         <li><a>Settings</a></li>
         <li>
           <Link to="/dashboard/admin">Dashboard</Link>
