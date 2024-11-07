@@ -94,10 +94,10 @@ const Order = () => {
                             </tfoot>
                         </table>
                     ) : (
-                        <div className="flex items-center justify-center">
+                        <div className="flex items-center justify-center md:h-96">
                             <h2 className="text-2xl">You have no transactions. <Link to="/menu" className="text-primary hover:underline">Order Now!!!</Link></h2>
                         </div>
-                )
+                    )
                 }
 
             </div>
