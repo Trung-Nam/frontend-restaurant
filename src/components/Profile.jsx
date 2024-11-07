@@ -1,8 +1,11 @@
 import React, { useContext } from 'react'
 import { AuthContext } from '../contexts/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
+import useAdmin from '../hooks/useAdmin';
 const Profile = ({ user }) => {
   const { logout } = useContext(AuthContext);
+  const [isAdmin] = useAdmin();
+
   const navigate = useNavigate();
   const handleLogout = () => {
     logout();
@@ -28,10 +31,13 @@ const Profile = ({ user }) => {
           </a>
         </li>
         <li><a href='/order'>Order</a></li>
-        <li><a>Settings</a></li>
-        <li>
-          <Link to="/dashboard/admin">Dashboard</Link>
-        </li>
+        {/* <li><a>Settings</a></li> */}
+        {isAdmin &&
+          <li>
+            <Link to="/dashboard/admin">Dashboard</Link>
+          </li>
+        }
+
         <li><a onClick={handleLogout}>Logout</a></li>
       </ul>
     </div>
