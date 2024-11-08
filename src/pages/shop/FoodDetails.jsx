@@ -95,7 +95,7 @@ const FoodDetails = () => {
     }
 
     return (
-        <div className='section-container xl:px-24 px-4'>
+        <div className='section-container px-4'>
             <div className='max-w-screen-2xl container mx-auto bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] to-100%'>
                 <div className='py-24 flex flex-col justify-center items-center gap-8'>
                     <div className='space-y-5 px-4'>

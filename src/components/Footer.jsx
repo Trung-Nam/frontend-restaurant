@@ -3,7 +3,7 @@ import React from "react";
 const Footer = () => {
   return (
     <div className="section-container py-32">
-      <footer className="footer xl:px-24 py-10 px-4 text-base-content">
+      <footer className="footer py-10 px-4 text-base-content">
         <aside>
           <img src="/logo.png" alt="" />
           <p className="my-5 md:w-40">
@@ -32,7 +32,7 @@ const Footer = () => {
         </nav>
       </footer>
         <hr />
-      <footer className="footer items-center xl:px-24 px-4 py-4 mt-2">
+      <footer className="footer items-center px-4 py-4 mt-2">
         <aside className="items-center grid-flow-col">
           <p>Copyright © 2023 - All right reserved</p>
         </aside>

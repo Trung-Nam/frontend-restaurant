@@ -26,7 +26,7 @@ const Order = () => {
     }
 
     return (
-        <div className="max-w-screen-2xl container mx-auto xl:px-24 px-4">
+        <div className="max-w-screen-2xl container mx-auto px-4">
             {/* banner */}
             <div className='max-w-screen-2xl container mx-auto bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] to-100%'>
                 <div className='py-36 flex flex-col justify-center items-center gap-8'>
