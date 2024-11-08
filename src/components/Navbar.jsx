@@ -46,10 +46,10 @@ const Navbar = () => {
     const navItems = (
         <>
             <li className={activeItem === 'Home' ? 'active' : ''}>
-                <a href="/" onClick={() => handleItemClick('Home')}>Home</a>
+                <Link to="/" onClick={() => handleItemClick('Home')}>Home</Link>
             </li>
             <li className={activeItem === 'Menu' ? 'active' : ''}>
-                <a href="/menu" onClick={() => handleItemClick('Menu')}>Menu</a>
+                <Link to="/menu" onClick={() => handleItemClick('Menu')}>Menu</Link>
             </li>
             <li tabIndex={0}>
                 <details>
@@ -62,7 +62,7 @@ const Navbar = () => {
                 </details>
             </li>
             <li className={activeItem === 'Offers' ? 'active' : ''}>
-                <a onClick={() => handleItemClick('Offers')}>Offers</a>
+                <Link onClick={() => handleItemClick('Offers')}>Offers</Link>
             </li>
         </>
     );

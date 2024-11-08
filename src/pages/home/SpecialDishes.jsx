@@ -2,20 +2,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import Slider from "react-slick";
 import Card from '../../components/Card';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
+import useMenu from '../../hooks/useMenu';
 
 const SpecialDishes = () => {
-    const [recipes, setRecipes] = useState([]);
-    const slider = useRef(null);
+    const [menu] = useMenu();
 
-    useEffect(() => {
-        fetch("/menu.json")
-            .then((res) => res.json())
-            .then((data) => {
-                const specials = data.filter((item) => item.category === "popular");
-                // console.log(specials)
-                setRecipes(specials);
-            });
-    }, []);
+    const slider = useRef(null);
 
     const NextArrow = (props) => {
         const { className, style, onClick } = props;
@@ -97,8 +89,8 @@ const SpecialDishes = () => {
             </div>
 
             <Slider ref={slider} {...settings} className='overflow-hidden mt-10 space-x-5 w-100'>
-                {recipes.map((recipe, index) => (
-                    <Card key={index} item={recipe} />
+                {menu.slice(0, 5).map((item) => (
+                    <Card key={item._id} item={item} />
                 ))}
             </Slider>
         </div>

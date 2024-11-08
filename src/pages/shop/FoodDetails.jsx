@@ -115,7 +115,7 @@ const FoodDetails = () => {
                     <img
                         src={item?.image}
                         alt="food-image"
-                        className='rounded-3xl'
+                        className='rounded-3xl w-full h-[465px] object-cover'
                     />
                     <div
                         className={`rating gap-1 absolute right-5 top-20 p-4 heartStar bg-primary ${isHeartFilled ? "text-rose-500" : "text-white"
@@ -130,14 +130,14 @@ const FoodDetails = () => {
                 </div>
                 <div className="col-span-5 row-span-5 col-start-4 ps-3">
                     <h3 className="md:text-2xl text-2xl font-semibold py-4 px-2 text-center">Ingredients</h3>
-                    <div className="flex flex-wrap justify-around items-center gap-10 ms-8">
+                    <div className="flex flex-wrap justify-around items-center gap-10 md:ms-8">
                         {
                             item?.ingredients?.map((ingredient) => (
                                 <div key={ingredient._id} className="space-y-3">
                                     <img
                                         src={ingredient?.ingredientImage}
                                         alt="food-image"
-                                        className='w-24 h-24 md:w-30 md:h-30 rounded-full object-cover'
+                                        className='w-20 h-20 md:w-30 md:h-30 rounded-full object-cover'
                                     />
                                     <h3 className="text-xs md:text-sm font-semibold">{ingredient?.ingredientName}</h3>
                                 </div>
