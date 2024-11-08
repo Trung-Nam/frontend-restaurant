@@ -16,7 +16,8 @@ const Navbar = () => {
     const [isSearchActive, setIsSearchActive] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredSuggestions, setFilteredSuggestions] = useState([]);
-
+    // console.log(menu);
+    
     useEffect(() => {
         const handleScroll = () => {
             setIsSticky(window.scrollY > 0);
@@ -80,7 +81,7 @@ const Navbar = () => {
                             {navItems}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl">
+                    <a href='/' className="btn btn-ghost text-xl">
                         <img src={logo} alt="logo" />
                     </a>
                 </div>

@@ -99,7 +99,7 @@ const Cards = ({ item }) => {
     }
 
     return (
-        <div className="card shadow-xl relative mx-2 md:my-4">
+        <div className="card shadow-xl relative mx-2 md:my-4 overflow-hidden">
             <div
                 className={`rating gap-1 absolute right-2 top-2 p-4 heartStar bg-primary ${isHeartFilled ? "text-rose-500" : "text-white"
                     }`}
@@ -120,7 +120,7 @@ const Cards = ({ item }) => {
                 <Link to={`/menu/${item._id}`}>
                     <h2 className="card-title hover:text-primary">{item.name}</h2>
                 </Link>
-                <p>Description of the item</p>
+                <p className="clamped-text">{item.description}</p>
                 <div className="card-actions justify-between items-center mt-2">
                     <h5 className='font-semibold'>
                         <span className='text-sm text-soft-red'>$ </span>{item.price}
