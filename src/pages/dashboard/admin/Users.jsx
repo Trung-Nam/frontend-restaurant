@@ -66,9 +66,12 @@ const Users = () => {
                     )}
                   </td>
                   <td>
-                    <button onClick={() => handleDeleteUser(user)} className="btn btn-xs bg-orange-500 text-white">
-                      <FaTrashAlt />
-                    </button>
+                    {
+                      user?.role === "user" && <button onClick={() => handleDeleteUser(user)} className="btn btn-xs bg-orange-500 text-white">
+                        <FaTrashAlt />
+                      </button>
+                    }
+
                   </td>
                 </tr>
               ))}

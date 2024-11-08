@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import useAuth from "../hooks/useAuth";
-import { toast } from "react-toastify"
+
 
 const Login = () => {
     const [errorMessage, setErrorMessage] = useState("");
@@ -12,9 +12,7 @@ const Login = () => {
     const axiosPublic = useAxiosPublic();
 
     const navigate = useNavigate();
-    const location = useLocation();
 
-    const from = location.state?.from?.pathname || "/";
 
     //react hook form
     const {
@@ -42,19 +40,17 @@ const Login = () => {
     const handleLoginWithGoogle = () => {
         signInWithGmail()
             .then((result) => {
-                // const user = result.user;
                 // console.log(user);
-
-                // const userInfo = {
-                //     name: result?.user?.displayName,
-                //     email: result?.user?.email,
-                // };
-                // axiosPublic
-                //     .post("/users", userInfo)
-                //     .then((response) => {
-                //         console.log(response);
-                //         alert("Login successful!");
-                //     });
+                const userInfo = {
+                    name: result?.user?.displayName,
+                    email: result?.user?.email,
+                };
+                axiosPublic
+                    .post("/users", userInfo)
+                    .then((response) => {
+                        console.log(response);
+                        alert("Login successful!");
+                    });
                 navigate("/", { state: { message: '🦄 Login successful!' } });
             })
             .catch((error) => console.log(error));

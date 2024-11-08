@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Card from '../../components/Card'
-import { FaFilter } from 'react-icons/fa';
+import { FaFilter, FaSearch } from 'react-icons/fa';
 
 const Menu = () => {
     const [menu, setMenu] = useState([]);
@@ -8,6 +8,7 @@ const Menu = () => {
     const [selectedCategory, setSelectedCategory] = useState('all');
     const [sortOption, setSortOption] = useState('default');
     const [currentPage, setCurrentPage] = useState(1);
+    const [searchTerm, setSearchTerm] = useState("");
     const itemsPerPage = 8;
 
     const categories = ["all", ...new Set(menu.map(item => item.category))];
@@ -34,7 +35,17 @@ const Menu = () => {
         setFilteredItems(filtered);
         setSelectedCategory(category);
         setCurrentPage(1);
-    }
+    };
+
+    // Handle search
+    const handleSearch = (e) => {
+        setSearchTerm(e.target.value);
+        const searchedItems = menu.filter((item) =>
+            item.name.toLowerCase().includes(e.target.value.toLowerCase())
+        );
+        setFilteredItems(searchedItems);
+        setCurrentPage(1);
+    };
 
     // Sorting based on A-Z, Z-A, Low-High pricing
     const handleSortChange = (option) => {
@@ -61,7 +72,7 @@ const Menu = () => {
 
         setFilteredItems(sortedItems);
         setCurrentPage(1);
-    }
+    };
 
     // Get current items based on the currentPage
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -74,39 +85,31 @@ const Menu = () => {
     // Handle pagination click
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
-    }
+    };
 
     // Function to generate pagination items
     const getPaginationGroup = () => {
         const pages = [];
-        const maxPageNumbers = 8; // Adjust this as needed
+        const maxPageNumbers = 8;
         const ellipsis = '...';
 
         if (totalPages <= maxPageNumbers) {
-            // Show all pages if the total is less than or equal to maxPageNumbers
             for (let i = 1; i <= totalPages; i++) pages.push(i);
         } else {
-            // Add first page
             pages.push(1);
-
-            // Show ellipsis if currentPage is far from the beginning
             if (currentPage > 3) pages.push(ellipsis);
 
-            // Determine start and end of the pagination group around currentPage
             const startPage = Math.max(2, currentPage - 1);
             const endPage = Math.min(totalPages - 1, currentPage + 1);
 
             for (let i = startPage; i <= endPage; i++) pages.push(i);
 
-            // Show ellipsis if currentPage is far from the end
             if (currentPage < totalPages - 2) pages.push(ellipsis);
 
-            // Add last page
             pages.push(totalPages);
         }
         return pages;
     };
-
 
     return (
         <>
@@ -114,16 +117,24 @@ const Menu = () => {
             <div className='section-container bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] to-100%'>
                 <div className='py-48 flex flex-col md:flex-row justify-center items-center gap-8'>
                     {/* Text */}
-                    <div className='text-center space-y-7 px-4'>
+                    <div className='text-center space-y-7 px-4 flex flex-col justify-center items-center'>
                         <h2 className='md:text-5xl text-4xl font-bold md:leading-snug leading-snug'>
                             Dive into Delights Of Delectable <span className='text-primary'>Food</span>
                         </h2>
                         <p className='text-xl text-[#4A4A4A] md:w-4/5 mx-auto'>
                             "Come with family & feel the joy of mouthwatering food such as Greek Salad, Lasagne, Butternut Pumpkin, Tokusen Wagyu, Olivas Rellenas and more for a moderate cost."
                         </p>
-                        <button className='btn bg-primary px-8 py-3 font-semibold text-white rounded-full'>
-                            Order Now
-                        </button>
+                        {/* Search Box */}
+                        <div className="flex items-center bg-white border border-gray-300 rounded-full px-4 py-2 w-2/3">
+                            <FaSearch className="text-gray-500 mr-2" />
+                            <input
+                                type="text"
+                                placeholder="Search menu items"
+                                value={searchTerm}
+                                onChange={handleSearch}
+                                className="flex-grow focus:outline-none"
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -147,14 +158,14 @@ const Menu = () => {
 
                     {/* Sorting filter */}
                     <div className="flex justify-end mb-4 rounded-sm">
-                        <div className="bg-black p-2">
+                        <div className="bg-primary p-2">
                             <FaFilter className="text-white h-4 w-4" />
                         </div>
                         <select
                             id="sort"
                             onChange={(e) => handleSortChange(e.target.value)}
                             value={sortOption}
-                            className="bg-black text-white px-2 py-1 rounded-sm"
+                            className="bg-white text-black rounded-sm shadow-2xl border-2"
                         >
                             <option value="default">Default</option>
                             <option value="A-Z">A-Z</option>
