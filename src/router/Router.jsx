@@ -14,6 +14,7 @@ import UpdateMenu from "../pages/dashboard/admin/UpdateMenu";
 import App from "../App";
 import Payment from "../pages/shop/Payment";
 import Order from "../pages/dashboard/Order";
+import FoodDetails from "../pages/shop/FoodDetails";
 
 
 const router = createBrowserRouter([
@@ -27,8 +28,12 @@ const router = createBrowserRouter([
             },
             {
                 path: "/menu",
-                element: <Menu />,
-
+                element: <Menu />
+            },
+            {
+                path: "/menu/:id",
+                element: <FoodDetails/>,
+                loader: ({ params }) => fetch(`http://localhost:6001/menu/${params.id}`)
             },
             {
                 path: "/user-profile",

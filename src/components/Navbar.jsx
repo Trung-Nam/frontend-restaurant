@@ -16,7 +16,8 @@ const Navbar = () => {
     const [isSearchActive, setIsSearchActive] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredSuggestions, setFilteredSuggestions] = useState([]);
-
+    // console.log(menu);
+    
     useEffect(() => {
         const handleScroll = () => {
             setIsSticky(window.scrollY > 0);
@@ -45,10 +46,10 @@ const Navbar = () => {
     const navItems = (
         <>
             <li className={activeItem === 'Home' ? 'active' : ''}>
-                <a href="/" onClick={() => handleItemClick('Home')}>Home</a>
+                <Link to="/" onClick={() => handleItemClick('Home')}>Home</Link>
             </li>
             <li className={activeItem === 'Menu' ? 'active' : ''}>
-                <a href="/menu" onClick={() => handleItemClick('Menu')}>Menu</a>
+                <Link to="/menu" onClick={() => handleItemClick('Menu')}>Menu</Link>
             </li>
             <li tabIndex={0}>
                 <details>
@@ -61,7 +62,7 @@ const Navbar = () => {
                 </details>
             </li>
             <li className={activeItem === 'Offers' ? 'active' : ''}>
-                <a onClick={() => handleItemClick('Offers')}>Offers</a>
+                <Link onClick={() => handleItemClick('Offers')}>Offers</Link>
             </li>
         </>
     );
@@ -80,7 +81,7 @@ const Navbar = () => {
                             {navItems}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-xl">
+                    <a href='/' className="btn btn-ghost text-xl">
                         <img src={logo} alt="logo" />
                     </a>
                 </div>

@@ -1,482 +1,233 @@
 [
-    {
-        "_id": "642c155b2c4774f05c36eeaa",
-        "name": "Haddock",
-        "recipe": "Chargrilled fresh tuna steak (served medium rare) on classic Niçoise salad with French beans.",
-        "image": "/images/recipes/img1.png",
-        "category": "salad",
-        "price": 14.7
-    },
-    {
-        "_id": "642c155b2c4774f05c36eeb9",
-        "name": "Haddock",
-        "recipe": "Chargrilled fresh tuna steak (served medium rare) on classic Niçoise salad with French beans.",
-        "image": "/images/recipes/img2.png",
-        "category": "drinks",
-        "price": 14.7
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee7c",
-        "name": "Escalope de Veau",
-        "recipe": "Roasted duck breast (served pink) with gratin potato and a griottine cherry sauce",
-        "image": "/images/recipes/img1.png",
-        "category": "popular",
-        "price": 14.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee88",
-        "name": "Escalope de Veau",
-        "recipe": "Pan roasted haddock fillet wrapped in smoked French bacon with pea purée and tomato and chive vinaigrette",
-        "image": "/images/recipes/img1.png",
-        "category": "dessert",
-        "price": 12.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee7a",
-        "name": "Roast Duck Breast",
-        "recipe": "Roasted duck breast (served pink) with gratin potato and a griottine cherry sauce",
-        "image": "/images/recipes/img2.png",
-        "category": "popular",
-        "price": 14.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee74",
-        "name": "Roast Duck Breast",
-        "recipe": "Roasted duck breast (served pink) with gratin potato and a griottine cherry sauce",
-        "image": "/images/recipes/img3.png",
-        "category": "popular",
-        "price": 14.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee712",
-        "name": "Roast Duck Breast",
-        "recipe": "Roasted duck breast (served pink) with gratin potato and a griottine cherry sauce",
-        "image": "/images/recipes/img1.png",
-        "category": "popular",
-        "price": 14.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee7x",
-        "name": "Roast Duck Breast",
-        "recipe": "Roasted duck breast (served pink) with gratin potato and a griottine cherry sauce",
-        "image": "/images/recipes/img2.png",
-        "category": "popular",
-        "price": 14.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee8c",
-        "name": "Escalope de Veau",
-        "recipe": "Pan roasted haddock fillet wrapped in smoked French bacon with pea purée and tomato and chive vinaigrette",
-        "image": "/images/recipes/img3.png",
-        "category": "dessert",
-        "price": 12.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee94",
-        "name": "Escalope de Veau",
-        "recipe": "Pan roasted haddock fillet wrapped in smoked French bacon with pea purée and tomato and chive vinaigrette",
-        "image": "/images/recipes/img1.png",
-        "category": "pizza",
-        "price": 12.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee9e",
-        "name": "Breton Fish Stew",
-        "recipe": "Chargrilled chicken with avocado, baby gem lettuce, baby spinach, shallots, French beans, walnuts, croutons and a mustard dressing",
-        "image": "/images/recipes/img2.png",
-        "category": "pizza",
-        "price": 12.9
-    },
-    {
-        "_id": "642c155b2c4774f05c36eea6",
-        "name": "Chicken and Walnut Salad",
-        "recipe": "Pan roasted pork belly with gratin potato, braised Savoy cabbage, apples, thyme and calvados jus",
-        "image": "/images/recipes/img3.png",
-        "category": "salad",
-        "price": 13.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36eeaf",
-        "name": "Escalope de Veau",
-        "recipe": "Pan roasted haddock fillet wrapped in smoked French bacon with pea purée and tomato and chive vinaigrette",
-        "image": "/images/recipes/img1.png",
-        "category": "soup",
-        "price": 12.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee89",
-        "name": "Chicken and Walnut Salad",
-        "recipe": "Pan roasted pork belly with gratin potato, braised Savoy cabbage, apples, thyme and calvados jus",
-        "image": "/images/recipes/img2.png",
-        "category": "dessert",
-        "price": 13.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee8a",
-        "name": "Escalope de Veau",
-        "recipe": "Pan roasted haddock fillet wrapped in smoked French bacon with pea purée and tomato and chive vinaigrette",
-        "image": "/images/recipes/img3.png",
-        "category": "dessert",
-        "price": 12.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee96",
-        "name": "Fish Parmentier",
-        "recipe": "Sautéed breaded veal escalope with watercress, lemon and veal jus.",
-        "image": "/images/recipes/img1.png",
-        "category": "pizza",
-        "price": 9.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee81",
-        "name": "Tuna Niçoise",
-        "recipe": "Warm goats cheese and roasted vegetable salad with black olive tapenade crostini",
-        "image": "/images/recipes/img2.png",
-        "category": "offered",
-        "price": 10.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee84",
-        "name": "Roast Duck Breast",
-        "recipe": "Roasted duck breast (served pink) with gratin potato and a griottine cherry sauce",
-        "image": "/images/recipes/img3.png",
-        "category": "dessert",
-        "price": 14.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36eea4",
-        "name": "Chicken and Walnut Salad",
-        "recipe": "Pan roasted pork belly with gratin potato, braised Savoy cabbage, apples, thyme and calvados jus",
-        "image": "/images/recipes/img1.png",
-        "category": "salad",
-        "price": 13.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36eea5",
-        "name": "Fish Parmentier",
-        "recipe": "Sautéed breaded veal escalope with watercress, lemon and veal jus.",
-        "image": "/images/recipes/img2.png",
-        "category": "salad",
-        "price": 9.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee87",
-        "name": "Chicken and Walnut Salad",
-        "recipe": "Pan roasted pork belly with gratin potato, braised Savoy cabbage, apples, thyme and calvados jus",
-        "image": "/images/recipes/img3.png",
-        "category": "dessert",
-        "price": 13.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee83",
-        "name": "Chicken and Walnut Salad",
-        "recipe": "Pan roasted pork belly with gratin potato, braised Savoy cabbage, apples, thyme and calvados jus",
-        "image": "/images/recipes/img1.png",
-        "category": "offered",
-        "price": 13.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee7f",
-        "name": "Roasted Pork Belly",
-        "recipe": "Roasted duck breast (served pink) with gratin potato and a griottine cherry sauce",
-        "image": "/images/recipes/img2.png",
-        "category": "popular",
-        "price": 14.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36eea8",
-        "name": "Chicken and Walnut Salad",
-        "recipe": "Pan roasted pork belly with gratin potato, braised Savoy cabbage, apples, thyme and calvados jus",
-        "image": "/images/recipes/img3.png",
-        "category": "salad",
-        "price": 13.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36eeba",
-        "name": "Haddock",
-        "recipe": "Chargrilled fresh tuna steak (served medium rare) on classic Niçoise salad with French beans.",
-        "image": "/images/recipes/img1.png",
-        "category": "drinks",
-        "price": 14.7
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee80",
-        "name": "Roast Duck Breast",
-        "recipe": "Roasted duck breast (served pink) with gratin potato and a griottine cherry sauce",
-        "image": "/images/recipes/img2.png",
-        "category": "offered",
-        "price": 14.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee90",
-        "name": "Fish Parmentier",
-        "recipe": "Sautéed breaded veal escalope with watercress, lemon and veal jus.",
-        "image": "/images/recipes/img3.png",
-        "category": "dessert",
-        "price": 9.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36eeb0",
-        "name": "Chicken and Walnut Salad",
-        "recipe": "Pan roasted pork belly with gratin potato, braised Savoy cabbage, apples, thyme and calvados jus",
-        "image": "/images/recipes/img1.png",
-        "category": "soup",
-        "price": 13.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee8d",
-        "name": "Chicken and Walnut Salad",
-        "recipe": "Pan roasted pork belly with gratin potato, braised Savoy cabbage, apples, thyme and calvados jus",
-        "image": "/images/recipes/img2.png",
-        "category": "dessert",
-        "price": 13.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee8e",
-        "name": "Escalope de Veau",
-        "recipe": "Pan roasted haddock fillet wrapped in smoked French bacon with pea purée and tomato and chive vinaigrette",
-        "image": "/images/recipes/img3.png",
-        "category": "dessert",
-        "price": 12.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36eea7",
-        "name": "Fish Parmentier",
-        "recipe": "Sautéed breaded veal escalope with watercress, lemon and veal jus.",
-        "image": "/images/recipes/img2.png",
-        "category": "salad",
-        "price": 9.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee99",
-        "name": "Goats Cheese Pizza",
-        "recipe": "Roasted duck breast (served pink) with gratin potato and a griottine cherry sauce",
-        "image": "/images/recipes/img1.png",
-        "category": "pizza",
-        "price": 14.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36eeb3",
-        "name": "Fish Parmentier",
-        "recipe": "Sautéed breaded veal escalope with watercress, lemon and veal jus.",
-        "image": "/images/recipes/img3.png",
-        "category": "soup",
-        "price": 9.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36eeb5",
-        "name": "Fish Parmentier",
-        "recipe": "Sautéed breaded veal escalope with watercress, lemon and veal jus.",
-        "image": "/images/recipes/img1.png",
-        "category": "soup",
-        "price": 9.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36eeb6",
-        "name": "Haddock",
-        "recipe": "Chargrilled fresh tuna steak (served medium rare) on classic Niçoise salad with French beans.",
-        "image": "/images/recipes/img2.png",
-        "category": "soup",
-        "price": 14.7
-    },
-    {
-        "_id": "642c155b2c4774f05c36eeb8",
-        "name": "Haddock",
-        "recipe": "Chargrilled fresh tuna steak (served medium rare) on classic Niçoise salad with French beans.",
-        "image": "/images/recipes/img3.png",
-        "category": "soup",
-        "price": 14.7
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee7e",
-        "name": "Fish Parmentier",
-        "recipe": "Roasted duck breast (served pink) with gratin potato and a griottine cherry sauce",
-        "image": "/images/recipes/img1.png",
-        "category": "popular",
-        "price": 14.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee8b",
-        "name": "Chicken and Walnut Salad",
-        "recipe": "Pan roasted pork belly with gratin potato, braised Savoy cabbage, apples, thyme and calvados jus",
-        "image": "/images/recipes/img2.png",
-        "category": "dessert",
-        "price": 13.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee8f",
-        "name": "Chicken and Walnut Salad",
-        "recipe": "Pan roasted pork belly with gratin potato, braised Savoy cabbage, apples, thyme and calvados jus",
-        "image": "/images/recipes/img3.png",
-        "category": "dessert",
-        "price": 13.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee91",
-        "name": "Haddock",
-        "recipe": "Chargrilled fresh tuna steak (served medium rare) on classic Niçoise salad with French beans",
-        "image": "/images/recipes/img1.png",
-        "category": "dessert",
-        "price": 14.7
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee97",
-        "name": "Haddock",
-        "recipe": "Chargrilled fresh tuna steak (served medium rare) on classic Niçoise salad with French beans.",
-        "image": "/images/recipes/img2.png",
-        "category": "pizza",
-        "price": 14.7
-    },
-    {
-        "_id": "642c155b2c4774f05c36eea0",
-        "name": "Roasted Pork Belly",
-        "recipe": "Chargrilled chicken with avocado, baby gem lettuce, baby spinach, shallots, French beans, walnuts, croutons and a mustard dressing",
-        "image": "/images/recipes/img3.png",
-        "category": "pizza",
-        "price": 14.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36eea9",
-        "name": "Fish Parmentier",
-        "recipe": "Sautéed breaded veal escalope with watercress, lemon and veal jus.",
-        "image": "/images/recipes/img1.png",
-        "category": "salad",
-        "price": 9.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee85",
-        "name": "Tuna Niçoise",
-        "recipe": "Warm goats cheese and roasted vegetable salad with black olive tapenade crostini",
-        "image": "/images/recipes/img2.png",
-        "category": "dessert",
-        "price": 10.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee93",
-        "name": "Tuna Niçoise",
-        "recipe": "Warm goats cheese and roasted vegetable salad with black olive tapenade crostini",
-        "image": "/images/recipes/img3.png",
-        "category": "pizza",
-        "price": 10.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee95",
-        "name": "Chicken and Walnut Salad",
-        "recipe": "Pan roasted pork belly with gratin potato, braised Savoy cabbage, apples, thyme and calvados jus",
-        "image": "/images/recipes/img1.png",
-        "category": "pizza",
-        "price": 13.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee9b",
-        "name": "Goats Cheese Pizza",
-        "recipe": "Roasted duck breast (served pink) with gratin potato and a griottine cherry sauce",
-        "image": "/images/recipes/img1.png",
-        "category": "pizza",
-        "price": 14.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36eeb7",
-        "name": "Fish Parmentier",
-        "recipe": "Sautéed breaded veal escalope with watercress, lemon and veal jus.",
-        "image": "/images/recipes/img1.png",
-        "category": "soup",
-        "price": 9.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee9c",
-        "name": "Breton Fish Stew",
-        "recipe": "Chargrilled chicken with avocado, baby gem lettuce, baby spinach, shallots, French beans, walnuts, croutons and a mustard dressing",
-        "image": "/images/recipes/img1.png",
-        "category": "pizza",
-        "price": 12.9
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee9d",
-        "name": "Goats Cheese Pizza",
-        "recipe": "Roasted duck breast (served pink) with gratin potato and a griottine cherry sauce",
-        "image": "/images/recipes/img1.png",
-        "category": "pizza",
-        "price": 14.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36eeac",
-        "name": "Roasted Pork Belly",
-        "recipe": "Chargrilled chicken with avocado, baby gem lettuce, baby spinach, shallots, French beans, walnuts, croutons and a mustard dressing",
-        "image": "/images/recipes/img1.png",
-        "category": "salad",
-        "price": 14.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36eeb4",
-        "name": "Haddock",
-        "recipe": "Chargrilled fresh tuna steak (served medium rare) on classic Niçoise salad with French beans.",
-        "image": "/images/recipes/img1.png",
-        "category": "soup",
-        "price": 14.7
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee98",
-        "name": "Breton Fish Stew",
-        "recipe": "Chargrilled chicken with avocado, baby gem lettuce, baby spinach, shallots, French beans, walnuts, croutons and a mustard dressing",
-        "image": "/images/recipes/img1.png",
-        "category": "pizza",
-        "price": 12.9
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee82",
-        "name": "Escalope de Veau",
-        "recipe": "Pan roasted haddock fillet wrapped in smoked French bacon with pea purée and tomato and chive vinaigrette",
-        "image": "/images/recipes/img1.png",
-        "category": "offered",
-        "price": 12.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee86",
-        "name": "Escalope de Veau",
-        "recipe": "Pan roasted haddock fillet wrapped in smoked French bacon with pea purée and tomato and chive vinaigrette",
-        "image": "/images/recipes/img1.png",
-        "category": "dessert",
-        "price": 12.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36ee9a",
-        "name": "Breton Fish Stew",
-        "recipe": "Chargrilled chicken with avocado, baby gem lettuce, baby spinach, shallots, French beans, walnuts, croutons and a mustard dressing",
-        "image": "/images/recipes/img1.png",
-        "category": "pizza",
-        "price": 12.9
-    },
-    {
-        "_id": "642c155b2c4774f05c36eeab",
-        "name": "Goats Cheese Pizza",
-        "recipe": "Roasted duck breast (served pink) with gratin potato and a griottine cherry sauce",
-        "image": "/images/recipes/img1.png",
-        "category": "salad",
-        "price": 14.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36eeb1",
-        "name": "Fish Parmentier",
-        "recipe": "Sautéed breaded veal escalope with watercress, lemon and veal jus.",
-        "image": "/images/recipes/img1.png",
-        "category": "soup",
-        "price": 9.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36eead",
-        "name": "Roast Duck Breast",
-        "recipe": "Roasted duck breast (served pink) with gratin potato and a griottine cherry sauce",
-        "image": "/images/recipes/img1.png",
-        "category": "soup",
-        "price": 14.5
-    },
-    {
-        "_id": "642c155b2c4774f05c36eeae",
-        "name": "Tuna Niçoise",
-        "recipe": "Warm goats cheese and roasted vegetable salad with black olive tapenade crostini",
-        "image": "/images/recipes/img1.png",
-        "category": "soup",
-        "price": 10.5
-    }
+  {
+    "name": "Haddock Niçoise Salad",
+    "description": "Chargrilled fresh tuna steak (served medium rare) on classic Niçoise salad with French beans.",
+    "image": "https://images.unsplash.com/photo-1552767303-1da9f283eb35?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "category": "Salad",
+    "price": 14.7,
+    "ingredients": [
+      {
+        "ingredientName": "Chicken Breasts",
+        "ingredientImage": "https://images.unsplash.com/photo-1624364543842-b0472614eb68?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Q2hpY2tlbiUyMEJyZWFzdHN8ZW58MHx8MHx8fDA%3D"
+      },
+      {
+        "ingredientName": "Fresh Tuna Steak",
+        "ingredientImage": "https://media.istockphoto.com/id/1301917262/photo/fresh-tuna-fish-fillet-steaks-garnished-with-parsley-isolated-on-white-background.webp?a=1&b=1&s=612x612&w=0&k=20&c=l-UpRu8N6dhtNXh0VEd7c7wvx8Hu99awpuMHCWu7xEA="
+      },
+      {
+        "ingredientName": "French Beans",
+        "ingredientImage": "https://images.unsplash.com/photo-1652500777566-43dba7e8b6bc?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8RnJlbmNoJTIwQmVhbnN8ZW58MHx8MHx8fDA%3D"
+      },
+      {
+        "ingredientName": "Niçoise Olives",
+        "ingredientImage": "https://plus.unsplash.com/premium_photo-1691664005895-e095c0138509?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8TmklQzMlQTdvaXNlJTIwT2xpdmVzfGVufDB8fDB8fHww"
+      },
+      {
+        "ingredientName": "Tomatoes",
+        "ingredientImage": "https://plus.unsplash.com/premium_photo-1726138647192-5275bef08970?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8VG9tYXRvZXN8ZW58MHx8MHx8fDA%3D"
+      },
+      {
+        "ingredientName": "Hard-Boiled Eggs",
+        "ingredientImage": "https://media.istockphoto.com/id/1878762718/photo/delicious-boiled-eggs.webp?a=1&b=1&s=612x612&w=0&k=20&c=0NND8eB20GuvWJFOSw_Egz6DF-NzyeOtyICdPDqpdoE="
+      },
+      {
+        "ingredientName": "Lettuce",
+        "ingredientImage": "https://plus.unsplash.com/premium_photo-1674666545272-fa8f4acfc99b?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8bGV0dHVjZXxlbnwwfHwwfHx8MA%3D%3D"
+      }
+    ],
+    "instructions": [
+      {
+        "description": "Put the chicken breasts between two pieces of baking parchment and use a rolling pin to gently bash them until they are approximately 1cm thick. Cut each chicken breast into two even pieces."
+      },
+      {
+        "description": "If you're using a frying pan, heat two frying pans over medium-high heat, with one of them containing oil. Fry the chicken in the oiled pan for 3-4 mins on each side until they are cooked through. Season the chicken, reduce the heat, drizzle in the chilli sauce and half of the lemon juice, and cook for an additional 1-2 mins until the sauce is reduced. Remove the chicken from the heat."
+      },
+      {
+        "description": "If you're using an air-fryer, preheat it to 180C for 4 mins. Add the chicken to the air-fryer and cook for 12 mins. Drizzle over the chilli sauce and half the lemon juice and cook for an additional 1-2 mins until the chicken is cooked through and the sauce is reduced. Remove the chicken and keep it warm."
+      },
+      {
+        "description": "While the chicken is cooking, toast the buns in the dry frying pan for 30 seconds. Transfer them to a plate. If you're using an air fryer, put the buns in the air fryer for 1-2 mins until they are warm. Increase the air fryer temperature to 200C. Add the halloumi to the air fryer basket and cook for 10 mins, turning halfway through, until it's golden. Toss the cabbage with the mayo and the remaining lemon juice."
+      },
+      {
+        "description": "Spoon the hummus (or dip of your choice) into the toasted buns, then top with the rocket, chilli chicken, halloumi, and peppers. Drizzle with a little more chilli sauce, spoon over the cabbage, season with black pepper, and top with the bun lids. Serve with any extra cabbage on the side or a green salad."
+      }
+    ]
+  },
+  {
+    "name": "Margherita Pizza",
+    "description": "Classic Margherita pizza with fresh mozzarella, tomatoes, and basil.",
+    "image": "https://media.istockphoto.com/id/1312807757/photo/real-neapolitan-italian-pizza-called-margherita-pizza-just-out-of-the-oven.webp?a=1&b=1&s=612x612&w=0&k=20&c=xjkQY7Yz4GnJnqFCImn97XvM8u-GxpcXfU5c3_WnPX8=",
+    "category": "Pizza",
+    "price": 11.5,
+    "ingredients": [
+      {
+        "ingredientName": "Mozzarella",
+        "ingredientImage": "https://media.istockphoto.com/id/1848370234/photo/cheese-slices-portion-of-sliced-mozzarella-cheese.webp?a=1&b=1&s=612x612&w=0&k=20&c=BdLerXJZ7uSBVuKc8Sizfc6H24uOmx9v1aEle3HenxU="
+      },
+      {
+        "ingredientName": "Tomatoes",
+        "ingredientImage": "https://plus.unsplash.com/premium_photo-1671395501275-630ae5ea02c4?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dG9tYXRvZXN8ZW58MHx8MHx8fDA%3D"
+      },
+      {
+        "ingredientName": "Basil",
+        "ingredientImage": "https://images.unsplash.com/photo-1533792344354-ed5e8fc12494?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGJhc2lsfGVufDB8fDB8fHww"
+      }
+    ],
+    "instructions": [
+      { "description": "Preheat the oven to 475°F (245°C)." },
+      {
+        "description": "Roll out the pizza dough on a floured surface to your desired thickness."
+      },
+      { "description": "Spread tomato sauce evenly over the dough." },
+      {
+        "description": "Tear the mozzarella into pieces and distribute evenly on the pizza."
+      },
+      {
+        "description": "Add sliced tomatoes and sprinkle with fresh basil leaves."
+      },
+      {
+        "description": "Bake in the preheated oven for 10-12 minutes, until the crust is golden and the cheese is melted."
+      },
+      { "description": "Remove from oven, slice, and serve hot." }
+    ]
+  },
+  {
+    "name": "Minestrone Soup",
+    "description": "A hearty Italian vegetable soup with pasta and beans.",
+    "image": "https://media.istockphoto.com/id/1625313276/photo/tasty-minestrone-soup-made-of-legume-and-vegetables.webp?a=1&b=1&s=612x612&w=0&k=20&c=uMigBe_eSQGmzi9Whxs93m5sqtngM_KYsw5aw8CRN0g=",
+    "category": "Soup",
+    "price": 9.8,
+    "ingredients": [
+      {
+        "ingredientName": "Carrots",
+        "ingredientImage": "https://plus.unsplash.com/premium_photo-1664551735276-cdcc3ad7b596?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y2Fycm90c3xlbnwwfHwwfHx8MA%3D%3D"
+      },
+      {
+        "ingredientName": "Celery",
+        "ingredientImage": "https://plus.unsplash.com/premium_photo-1723485646947-c73bf14ccdb7?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y2VsZXJ5fGVufDB8fDB8fHww"
+      },
+      {
+        "ingredientName": "Cannellini Beans",
+        "ingredientImage": "https://media.istockphoto.com/id/149477972/photo/cannellini-beans.webp?a=1&b=1&s=612x612&w=0&k=20&c=1EKHVIfA9zQyooOdFxkVEuFVdB-VGpslLWRNd6i5wec="
+      }
+    ],
+    "instructions": [
+      { "description": "Heat olive oil in a large pot over medium heat." },
+      {
+        "description": "Add chopped onions, carrots, and celery; cook until softened, about 5 minutes."
+      },
+      { "description": "Add garlic and cook for an additional minute." },
+      { "description": "Pour in vegetable broth and bring to a simmer." },
+      {
+        "description": "Add pasta, beans, and diced tomatoes; cook for 10-15 minutes until pasta is tender."
+      },
+      { "description": "Season with salt, pepper, and Italian herbs." },
+      { "description": "Serve hot with grated Parmesan on top." }
+    ]
+  },
+  {
+    "name": "Chocolate Lava Cake",
+    "description": "Warm chocolate cake with a molten center, served with vanilla ice cream.",
+    "image": "https://media.istockphoto.com/id/1499766130/photo/chocolate-fondant-lava-cake.webp?a=1&b=1&s=612x612&w=0&k=20&c=qXPxHt_8VXDfBjjW1FnZkcNO5rhvs6wKlVcAOF-zWM0=",
+    "category": "Dessert",
+    "price": 6.5,
+    "ingredients": [
+      {
+        "ingredientName": "Dark Chocolate",
+        "ingredientImage": "https://plus.unsplash.com/premium_photo-1670426501227-450cb0d92a16?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZGFyayUyMGNob2NvbGF0ZXxlbnwwfHwwfHx8MA%3D%3D"
+      },
+      {
+        "ingredientName": "Butter",
+        "ingredientImage": "https://media.istockphoto.com/id/1203519127/photo/rectangular-pieces-of-fresh-yellow-butter-on-a-white-saucer-over-a-white-wooden-table-dairy.webp?a=1&b=1&s=612x612&w=0&k=20&c=AB5hkwhni5r3PCWMSRADoymdOt-cavARD4Q6ATp-8k4="
+      },
+      {
+        "ingredientName": "Vanilla Ice Cream",
+        "ingredientImage": "https://media.istockphoto.com/id/1818865138/photo/vanilla-ice-cream.webp?a=1&b=1&s=612x612&w=0&k=20&c=QqYQ0Jcg6X6wLjqs3T6VqH7VCpjEqWWWUypl6rx4LBU="
+      }
+    ],
+    "instructions": [
+      {
+        "description": "Preheat oven to 400°F (200°C) and grease small ramekins with butter."
+      },
+      {
+        "description": "Melt chocolate and butter in a heatproof bowl over simmering water until smooth."
+      },
+      {
+        "description": "Whisk eggs, sugar, and a pinch of salt until thick and pale."
+      },
+      { "description": "Fold melted chocolate into the egg mixture." },
+      {
+        "description": "Spoon the batter into the prepared ramekins and bake for 10-12 minutes until the edges are set but the center is soft."
+      },
+      {
+        "description": "Serve immediately with a scoop of vanilla ice cream on top."
+      }
+    ]
+  },
+  {
+    "name": "Mango Smoothie",
+    "description": "A refreshing mango smoothie blended with yogurt and honey.",
+    "image": "https://media.istockphoto.com/id/904617420/photo/fresh-mango-smoothie-in-the-glass.webp?a=1&b=1&s=612x612&w=0&k=20&c=owVY4fKM9_0n5MNTJ32JpUX7R39Uk0OW2v3OToswNi0=",
+    "category": "Drinks",
+    "price": 4.5,
+    "ingredients": [
+      {
+        "ingredientName": "Mango",
+        "ingredientImage": "https://media.istockphoto.com/id/2150794684/photo/mango-in-wooden-crate-at-farm-background.webp?a=1&b=1&s=612x612&w=0&k=20&c=Hjs7tzRv0tzzkoOVDjijGmJRk2AJdVYCLhn7yTFQuz8="
+      },
+      {
+        "ingredientName": "Yogurt",
+        "ingredientImage": "https://media.istockphoto.com/id/177545720/photo/young-beautiful-woman-eating-yogurt-at-home.webp?a=1&b=1&s=612x612&w=0&k=20&c=YboBLR-_TyYC9ukPpotTeP-xEIHPYv9ho6SyI5c6FvQ="
+      },
+      {
+        "ingredientName": "Honey",
+        "ingredientImage": "https://media.istockphoto.com/id/842769074/photo/sweet-honeycomb-and-wooden-honey-dripping.webp?a=1&b=1&s=612x612&w=0&k=20&c=3Wi2g_Z-_DcfHkulYM6ax0-niJNSIJ8Q3I1cXNlIA6U="
+      }
+    ],
+    "instructions": [
+      { "description": "Peel and dice the mango." },
+      {
+        "description": "Place mango, yogurt, honey, and a handful of ice cubes in a blender."
+      },
+      { "description": "Blend until smooth and creamy." },
+      {
+        "description": "Pour into a glass and garnish with a mint leaf if desired."
+      },
+      { "description": "Serve chilled and enjoy immediately." }
+    ]
+  },
+  {
+    "name": "BBQ Chicken Wings",
+    "description": "Juicy chicken wings coated in a smoky BBQ sauce.",
+    "image": "https://media.istockphoto.com/id/1438415993/photo/spicy-grilled-chicken-wings-with-sauce-on-a-wooden-plate-with-tomato-and-herb-on-a-dark.webp?a=1&b=1&s=612x612&w=0&k=20&c=RFtM0LvYFYBe7ShAX9jKf4AscDl5CodfS6RK4Wx0FSc=",
+    "category": "Popular",
+    "price": 8.9,
+    "ingredients": [
+      {
+        "ingredientName": "Chicken Wings",
+        "ingredientImage": "https://media.istockphoto.com/id/1285462667/photo/fried-chicken-wings-with-sweet-chili-sauce-on-white-paper.webp?a=1&b=1&s=612x612&w=0&k=20&c=sQMXwLStMBY666tVCnfKe-_w0xEoe-AnW0fmSIGOHoY="
+      },
+      {
+        "ingredientName": "BBQ Sauce",
+        "ingredientImage": "https://images.unsplash.com/photo-1638324396230-7fdd423089da?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8QkJRJTIwU2F1Y2V8ZW58MHx8MHx8fDA%3D"
+      },
+      {
+        "ingredientName": "Green Onions",
+        "ingredientImage": "https://images.unsplash.com/photo-1588692442236-bbdcfe705f70?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z3JlZW4lMjBvbmlvbnN8ZW58MHx8MHx8fDA%3D"
+      }
+    ],
+    "instructions": [
+      {
+        "description": "Preheat the oven to 400°F (200°C) and line a baking sheet with foil."
+      },
+      {
+        "description": "Pat the chicken wings dry with paper towels and place them on the baking sheet."
+      },
+      {
+        "description": "Bake the wings in the preheated oven for 25-30 minutes, flipping halfway, until golden and crispy."
+      },
+      { "description": "Toss the hot wings in BBQ sauce until fully coated." },
+      { "description": "Garnish with sliced green onions and serve hot." }
+    ]
+  }
 ]

@@ -50,3 +50,11 @@ input[type=number] {
   text-overflow: ellipsis;
   max-width: 120px;
 }
+
+.clamped-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+}
