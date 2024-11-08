@@ -19,10 +19,10 @@ const sharedLinks = (
       <Link to="/menu"><MdMenuBook /> Menu</Link>
     </li>
     <li>
-      <Link to="/menu"><FaLocationArrow /> Orders Tracking</Link>
+      <Link to=""><FaLocationArrow /> Orders Tracking</Link>
     </li>
     <li>
-      <Link to="/menu"><FaQuestionCircle /> Customer Support</Link>
+      <Link to=""><FaQuestionCircle /> Customer Support</Link>
     </li>
   </>
 );

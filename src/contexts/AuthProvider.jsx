@@ -72,12 +72,13 @@ const AuthProvider = ({ children }) => {
 
                 // Combine Firebase and database user data
                 const combinedUserData = {
-                    name:currentUser.displayName,
-                    email:currentUser.email,
-                    role:dbUserData.admin === true ? 'admin' :'user'
+                    name: currentUser.displayName,
+                    photoURL: currentUser.photoURL,
+                    email: currentUser.email,
+                    role: dbUserData.admin === true ? 'admin' : 'user'
                 };
                 // console.log(currentUser);
-                
+
                 // console.log(combinedUserData);
 
                 setUser(combinedUserData);
