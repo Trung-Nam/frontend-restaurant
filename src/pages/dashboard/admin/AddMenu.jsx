@@ -30,7 +30,6 @@ const AddMenu = () => {
         description: data.description,
         category: data.category,
         price: parseFloat(data.price),
-        recipe: data.recipe,
         image: hostingImg.data.data.display_url,
         ingredients: data.ingredients,
         instructions: data.instructions.map(inst => ({ description: inst.description })),
