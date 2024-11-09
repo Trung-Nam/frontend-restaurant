@@ -71,7 +71,7 @@ const Cards = ({ item }) => {
         }
     }
 
-    // add to favorites handler
+    //favorites handler
     const handleFavoritesAction = () => {
         if (user && user.email) {
             if (isHeartFilled) {
