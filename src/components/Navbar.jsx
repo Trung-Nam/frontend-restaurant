@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import logo from '../assets/images/logo.png';
 import { FaRegUser, FaSearch } from "react-icons/fa";
 import Profile from './Profile';
-import { Link } from 'react-router-dom';
 import useCart from '../hooks/useCart';
 import useAuth from '../hooks/useAuth';
 import useMenu from '../hooks/useMenu';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const [isSticky, setIsSticky] = useState(false);
@@ -16,14 +16,25 @@ const Navbar = () => {
     const [isSearchActive, setIsSearchActive] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredSuggestions, setFilteredSuggestions] = useState([]);
-    // console.log(menu);
-    
+    const searchRef = useRef(null); // Reference for the search input and suggestions
+
     useEffect(() => {
         const handleScroll = () => {
             setIsSticky(window.scrollY > 0);
         };
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    // Close suggestions when clicking outside the search box
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (searchRef.current && !searchRef.current.contains(event.target)) {
+                setIsSearchActive(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
 
     const handleItemClick = (item) => setActiveItem(item);
@@ -92,41 +103,42 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-end flex items-center gap-4">
                     {/* Search */}
-                    {isSearchActive ? (
-                        <div className="relative">
-                            <input
-                                type="text"
-                                value={searchTerm}
-                                onChange={handleSearchChange}
-                                placeholder="Search..."
-                                className="input w-full rounded-full h-8"
-                                autoFocus
-                                onBlur={() => setIsSearchActive(false)}
-                            />
-                            <FaSearch className="absolute right-2 top-2 text-gray-500" />
-                            {/* Suggestions dropdown */}
-                            {searchTerm && (
-                                <ul className="absolute z-10 w-full mt-2 bg-white shadow-md rounded-md max-h-96 overflow-y-scroll">
-                                    {filteredSuggestions.map((item) => (
-                                        <li key={item._id} className="px-4 py-2 hover:bg-gray-100 w-full">
-                                            <Link to={`/menu/${item._id}`} className="flex items-center justify-start gap-2 relative">
-                                                <img src={item.image} alt="item-image" className='w-8 h-8 rounded-full' />
-                                                <div className="text-sm truncated-text">{item.name}</div>
-                                                <div className='absolute right-0 text-soft-red'>${item.price}</div>
-                                            </Link>
-                                        </li>
-                                    ))}
-                                    {filteredSuggestions.length === 0 && (
-                                        <li className="px-4 py-2 text-gray-500">No results found</li>
-                                    )}
-                                </ul>
-                            )}
-                        </div>
-                    ) : (
-                        <button className="btn btn-ghost btn-circle hidden lg:flex" onClick={handleSearchIconClick}>
-                            <FaSearch className="text-gray-500" />
-                        </button>
-                    )}
+                    <div className="relative" ref={searchRef}>
+                        {isSearchActive ? (
+                            <div>
+                                <input
+                                    type="text"
+                                    value={searchTerm}
+                                    onChange={handleSearchChange}
+                                    placeholder="Search..."
+                                    className="input w-full rounded-full h-8"
+                                    autoFocus
+                                />
+                                <FaSearch className="absolute right-2 top-2 text-gray-500" />
+                                {/* Suggestions dropdown */}
+                                {searchTerm && (
+                                    <ul className="absolute z-10 w-full mt-2 bg-white shadow-md rounded-md max-h-96 overflow-y-scroll">
+                                        {filteredSuggestions.map((item) => (
+                                            <li key={item._id} className="px-4 py-2 hover:bg-gray-100 w-full">
+                                                <Link to={`/menu/${item._id}`} className="flex items-center justify-start gap-2 relative w-full">
+                                                    <img src={item.image} alt="item-image" className='w-8 h-8 rounded-full' />
+                                                    <div className="text-sm truncated-text">{item.name}</div>
+                                                    <div className='absolute right-0 text-soft-red'>${item.price}</div>
+                                                </Link>
+                                            </li>
+                                        ))}
+                                        {filteredSuggestions.length === 0 && (
+                                            <li className="px-4 py-2 text-gray-500">No results found</li>
+                                        )}
+                                    </ul>
+                                )}
+                            </div>
+                        ) : (
+                            <button className="btn btn-ghost btn-circle hidden lg:flex" onClick={handleSearchIconClick}>
+                                <FaSearch className="text-gray-500" />
+                            </button>
+                        )}
+                    </div>
                     {/* Cart */}
                     <Link to="cart-page">
                         <div className="flex-none mr-3 hidden lg:flex items-center justify-center">
