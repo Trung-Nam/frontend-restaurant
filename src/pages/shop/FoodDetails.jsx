@@ -1,22 +1,29 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import useAuth from '../../hooks/useAuth'
 import { FaHeart } from 'react-icons/fa';
 import { useLoaderData } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import useCart from '../../hooks/useCart';
-
+import useAxiosSecure from '../../hooks/useAxiosSecure';
+import useFavorites from '../../hooks/useFavoriteS';
 const FoodDetails = () => {
     const { user } = useAuth();
     const item = useLoaderData();
     const [isHeartFilled, setIsHeartFilled] = useState(false);
     const [cart, refetch] = useCart();
+    const [favorites, refetchFavorites] = useFavorites();
+    const axiosSecure = useAxiosSecure();
     // console.log(item);
 
+    useEffect(() => {
+        if (favorites && favorites?.menus?.some(fav => fav.menuId === item._id)) {
+            setIsHeartFilled(true);
+        } else {
+            setIsHeartFilled(false);
+        }
+    }, [favorites, item._id]);
 
-    const handleHeartClick = () => {
-        setIsHeartFilled(!isHeartFilled);
-    };
 
     // add to cart handler
     const handleAddToCart = () => {
@@ -94,6 +101,81 @@ const FoodDetails = () => {
         }
     }
 
+    //favorites handler
+    const handleFavoritesAction = () => {
+        if (user && user.email) {
+            if (isHeartFilled) {
+                // Remove from favorites
+                const favoriteToRemove = favorites?.menus?.find(fav => fav.menuId === item._id);
+                if (favoriteToRemove) {
+                    axiosSecure.delete(`/favorites/${favorites._id}/menu/${favoriteToRemove._id}`)
+                        .then((response) => {
+                            if (response) {
+                                refetchFavorites(); // Refetch favorites list
+                                setIsHeartFilled(false); // Mark heart as unfilled
+                                Swal.fire({
+                                    position: 'center',
+                                    icon: 'success',
+                                    title: 'Food removed from favorites list.',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            }
+                        })
+                        .catch((error) => {
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'warning',
+                                title: 'Something went wrong while removing from favorites.',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        });
+                }
+            } else {
+                // Add to favorites
+                const cartItem = { menuId: item._id, name: item?.name, image: item?.image, price: item?.price, email: user.email }
+
+                axiosSecure.post('/favorites', cartItem)
+                    .then((response) => {
+                        if (response) {
+                            refetchFavorites(); // Refetch favorites list
+                            setIsHeartFilled(true); // Mark heart as filled
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: 'Food added to the favorites list.',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        }
+                    })
+                    .catch((error) => {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'warning',
+                            title: 'Something went wrong while adding to favorites.',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    });
+            }
+        } else {
+            Swal.fire({
+                title: 'Please login to manage your favorites list',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '',
+                confirmButtonText: 'Login now!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate('/login', { state: { from: location } })
+                }
+            })
+        }
+    };
+
     return (
         <div className='section-container px-4'>
             <div className='max-w-screen-2xl container mx-auto bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] to-100%'>
@@ -120,7 +202,7 @@ const FoodDetails = () => {
                     <div
                         className={`rating gap-1 absolute right-5 top-20 p-4 heartStar bg-primary ${isHeartFilled ? "text-rose-500" : "text-white"
                             }`}
-                        onClick={handleHeartClick}
+                        onClick={handleFavoritesAction}
                     >
                         <FaHeart className="w-5 h-5 cursor-pointer" />
                     </div>
