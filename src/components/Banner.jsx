@@ -1,6 +1,7 @@
 import React from 'react'
 import banner from '../assets/images/home/banner.png'
 import foodBanner1 from '../assets/images/home/b-food1.png'
+import { Link } from 'react-router-dom'
 const Banner = () => {
     return (
         <div className='section-container bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] to-100%'>
@@ -13,9 +14,9 @@ const Banner = () => {
                     <p className='text-xl text-[#4A4A4A]'>
                         Where Each Plate Weaves a Story of Culinary Mastery and Passionate Craftsmanship
                     </p>
-                    <button className='btn bg-primary px-8 py-3 font-semibold text-white rounded-full'>
+                    <Link to={'/menu'} className='btn bg-primary px-8 py-3 font-semibold text-white rounded-full'>
                         Order Now
-                    </button>
+                    </Link>
                 </div>
                 {/* Image */}
                 <div className='md:w-1/2'>

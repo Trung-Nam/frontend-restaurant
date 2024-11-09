@@ -30,7 +30,7 @@ const Profile = ({ user }) => {
           </a>
         </li>
         <li><a href='/order'>Order</a></li>
-        {/* <li><a>Settings</a></li> */}
+        <li><a href='/favorites'>Favorites</a></li>
         {user.role === 'admin' &&
           <li>
             <Link to="/dashboard/admin">Dashboard</Link>

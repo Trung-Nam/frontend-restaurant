@@ -15,6 +15,7 @@ import App from "../App";
 import Payment from "../pages/shop/Payment";
 import Order from "../pages/dashboard/Order";
 import FoodDetails from "../pages/shop/FoodDetails";
+import Favorites from "../components/Favorites";
 
 
 const router = createBrowserRouter([
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/menu/:id",
-                element: <FoodDetails/>,
+                element: <FoodDetails />,
                 loader: ({ params }) => fetch(`http://localhost:6001/menu/${params.id}`)
             },
             {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
             {
                 path: "/cart-page",
                 element: <CartPage />
+            },
+            {
+                path: "/favorites",
+                element: <Favorites />
             },
             {
                 path: "/process-checkout",
@@ -59,7 +64,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/register",
-        element: <Register/>
+        element: <Register />
     },
     {
         path: "/dashboard",
