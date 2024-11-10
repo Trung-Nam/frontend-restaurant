@@ -6,7 +6,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import useCart from '../../hooks/useCart';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
-import useFavorites from '../../hooks/useFavoriteS';
+import useFavorites from '../../hooks/useFavorites';
 const FoodDetails = () => {
     const { user } = useAuth();
     const item = useLoaderData();
