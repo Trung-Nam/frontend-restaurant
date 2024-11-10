@@ -1,5 +1,5 @@
 import React from 'react'
-import useFavorites from '../hooks/useFavoriteS';
+import useFavorites from '../hooks/useFavorites';
 import { FaTrash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
