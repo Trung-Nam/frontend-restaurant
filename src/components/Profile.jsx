@@ -24,13 +24,13 @@ const Profile = ({ user }) => {
         tabIndex={0}
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
         <li>
-          <a href='/user-profile' className="justify-between">
+          <Link to='/user-profile' className="justify-between">
             Profile
             <span className="badge">New</span>
-          </a>
+          </Link>
         </li>
-        <li><a href='/order'>Order</a></li>
-        <li><a href='/favorites'>Favorites</a></li>
+        <li><Link to='/order'>Order</Link></li>
+        <li><Link to='/favorites'>Favorites</Link></li>
         {user.role === 'admin' &&
           <li>
             <Link to="/dashboard/admin">Dashboard</Link>
