@@ -5,7 +5,6 @@ import CartPage from "../pages/shop/CartPage";
 import DashboardLayout from "../layout/DashboardLayout";
 import Dashboard from "../pages/dashboard/admin/Dashboard";
 import Users from "../pages/dashboard/admin/Users";
-import UserProfile from "../pages/dashboard/UserProfile";
 import Login from "../components/Login";
 import Register from "../components/Register";
 import AddMenu from "../pages/dashboard/admin/AddMenu";
@@ -17,6 +16,7 @@ import Order from "../pages/dashboard/Order";
 import FoodDetails from "../pages/shop/FoodDetails";
 import Favorites from "../components/Favorites";
 import ForgetPassword from "../components/ForgetPassword";
+import UserProfile from "../components/UserProfile";
 
 
 const router = createBrowserRouter([

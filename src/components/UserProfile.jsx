@@ -1,9 +1,10 @@
 import React, { useContext } from 'react'
 import { useForm } from "react-hook-form"
-import { AuthContext } from '../../contexts/AuthProvider'
-import { useNavigate } from 'react-router-dom'
+
 import { toast } from 'react-toastify';
-import useAuth from '../../hooks/useAuth';
+import { AuthContext } from '../contexts/AuthProvider';
+import useAuth from '../hooks/useAuth';
+
 const UserProfile = () => {
     const { user } = useAuth();
     const { updateUserProfile } = useContext(AuthContext)
@@ -12,8 +13,6 @@ const UserProfile = () => {
         handleSubmit,
         formState: { errors },
     } = useForm();
-
-    const navigate = useNavigate();
 
     const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
     const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -57,7 +56,7 @@ const UserProfile = () => {
                 <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
                     <h2 className='font-bold text-center text-3xl mb-4'>Your Profile</h2>
                     <img
-                        src={user.photoURL ? user.photoURL : "https://i0.wp.com/digitalhealthskills.com/wp-content/uploads/2022/11/3da39-no-user-image-icon-27.png?fit=500%2C500&ssl=1"}
+                        src={user?.photoURL ? user?.photoURL : "https://i0.wp.com/digitalhealthskills.com/wp-content/uploads/2022/11/3da39-no-user-image-icon-27.png?fit=500%2C500&ssl=1"}
                         alt="avatar"
                         className='rounded-full w-40 h-40 mx-auto'
                     />

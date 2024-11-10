@@ -32,24 +32,33 @@ const Login = () => {
         reset();
     };
 
-    // login with google
-    const handleLoginWithGoogle = () => {
-        signInWithGmail()
-            .then((result) => {
-                const userInfo = {
-                    name: result?.user?.displayName,
-                    email: result?.user?.email,
-                };
-                axiosPublic
-                    .post("/users", userInfo)
-                    .then((response) => {
-                        // console.log(response);
-                        alert("Login successful!");
-                    });
-                navigate("/", { state: { message: '🦄 Login successful!' } });
-            })
-            .catch((error) => console.log(error));
+    // Client-side Google login handler with suppressed console log
+    const handleLoginWithGoogle = async () => {
+        try {
+            const result = await signInWithGmail();
+            const userInfo = {
+                name: result.user.displayName,
+                email: result.user.email,
+            };
+
+            const response = await axiosPublic.post("/users", userInfo);
+            if (response.status === 201) {
+                navigate("/", { state: { message: "🦄 New user created and logged in!" } });
+            } else {
+                navigate("/", { state: { message: "🦄 Logged in!" } });
+            }
+            navigate("/", { state: { message: "🦄 Login successful!" } });
+
+        } catch (error) {
+            if (error.response && error.response.status === 409) {
+                navigate("/", { state: { message: "🦄 Login successful!" } });
+            } else {
+                alert("An error occurred while logging in.");
+            }
+        }
     };
+
+
 
     return (
         <div
