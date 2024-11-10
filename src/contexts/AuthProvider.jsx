@@ -52,7 +52,7 @@ const AuthProvider = ({ children }) => {
                 const userInfo = { email: currentUser.email };
 
                 // Fetch or set JWT token for API requests
-                const tokenResponse = await fetch('http://localhost:6001/jwt', {
+                const tokenResponse = await fetch('https://backend-restaurant-b5d2.onrender.com/jwt', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ const AuthProvider = ({ children }) => {
                 }
 
                 // Use the token to authenticate and fetch user data from your database
-                const dbUserResponse = await fetch(`http://localhost:6001/users/admin/${currentUser.email}`, {
+                const dbUserResponse = await fetch(`https://backend-restaurant-b5d2.onrender.com/users/admin/${currentUser.email}`, {
                     headers: {
                         method: 'GET',
                         'Authorization': `Bearer ${tokenData.token}`,

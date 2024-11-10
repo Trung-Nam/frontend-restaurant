@@ -6,6 +6,7 @@ import Swal from 'sweetalert2'
 import useCart from "../hooks/useCart";
 import axios from 'axios';
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 import useFavorites from "../hooks/useFavorites";
 
 const Cards = ({ item }) => {
@@ -16,23 +17,24 @@ const Cards = ({ item }) => {
     const navigate = useNavigate();
     const location = useLocation();
     const axiosSecure = useAxiosSecure();
+    const axiosPublic = useAxiosPublic();
     const [isHeartFilled, setIsHeartFilled] = useState(false);
 
     // Check if the item is in the favorites list
     useEffect(() => {
         if (favorites && favorites?.menus?.some(fav => fav.menuId === _id)) {
-            setIsHeartFilled(true); 
+            setIsHeartFilled(true);
         } else {
-            setIsHeartFilled(false); 
+            setIsHeartFilled(false);
         }
-    }, [favorites, _id]); 
+    }, [favorites, _id]);
 
     // add to cart handler
     const handleAddToCart = () => {
         if (user && user.email) {
             const cartItem = { menuItemId: _id, name, quantity: 1, image, price, email: user.email }
 
-            axios.post('http://localhost:6001/carts', cartItem)
+            axiosPublic.post('/carts', cartItem)
                 .then((response) => {
                     if (response) {
                         refetch(); // refetch cart
