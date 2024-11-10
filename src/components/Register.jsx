@@ -1,66 +1,49 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaFacebookF, FaGithub, FaGoogle, FaRegUser } from "react-icons/fa";
+import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../contexts/AuthProvider";
 import useAxiosPublic from "../hooks/useAxiosPublic";
-const Register = () => {
-  const { signUpWithGmail, createUser, updateUserProfile } =
-    useContext(AuthContext);
-  const axiosPublic = useAxiosPublic();
 
+const Register = () => {
+  const { signUpWithGmail, createUser, updateUserProfile } = useContext(AuthContext);
+  const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm();
 
   const onSubmit = (data) => {
     const email = data.email;
     const password = data.password;
-    // console.log(email, password)
+
     createUser(email, password)
       .then((result) => {
-        // Signed up
         const user = result.user;
-        updateUserProfile(data.email, data.photoURL).then(() => {
+        updateUserProfile(data.name, data.photoURL).then(() => {
           const userInfo = {
             name: data.name,
             email: data.email,
           };
           axiosPublic.post("/users", userInfo)
-            .then((response) => {
-              // console.log(response);
+            .then(() => {
               navigate("/", { state: { message: '🦄 Create account successful!' } });
             });
         });
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorMessage);
+        console.log(error.message);
       });
   };
 
-  // login with google
-  const handleRegister = () => {
-    signUpWithGmail()
-      .then((result) => {
-        const user = result.user;
-        const userInfo = {
-          name: result?.user?.displayName,
-          email: result?.user?.email,
-        };
-        axiosPublic
-          .post("/users", userInfo)
-          .then((response) => {
-            navigate("/", { state: { message: '🦄 Create account successful!' } });
-          });
-      })
-      .catch((error) => console.log(error));
-  };
+
+  // Watch password to compare with confirm password
+  const password = watch("password");
+
   return (
     <div
       className="min-h-screen flex items-center justify-center"
@@ -74,20 +57,22 @@ const Register = () => {
         <div>
           <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
             <h3 className="font-bold text-2xl text-center">Create An Account!</h3>
-            {/* name */}
+
+            {/* Name */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Name</span>
               </label>
               <input
-                type="name"
+                type="text"
                 placeholder="Enter your name"
                 className="input input-bordered"
-                {...register("name")}
+                {...register("name", { required: "Name is required" })}
               />
+              {errors.name && <p className="text-soft-red text-xs italic mt-2">{errors.name.message}</p>}
             </div>
 
-            {/* email */}
+            {/* Email */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -96,11 +81,18 @@ const Register = () => {
                 type="email"
                 placeholder="Enter your email"
                 className="input input-bordered"
-                {...register("email")}
+                {...register("email", {
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                    message: "Invalid email address",
+                  },
+                })}
               />
+              {errors.email && <p className="text-soft-red text-xs italic mt-2">{errors.email.message}</p>}
             </div>
 
-            {/* password */}
+            {/* Password */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Password</span>
@@ -109,19 +101,35 @@ const Register = () => {
                 type="password"
                 placeholder="Enter your password"
                 className="input input-bordered"
-                {...register("password")}
+                {...register("password", {
+                  required: "Password is required",
+                  pattern: {
+                    value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
+                    message: "Password must be at least 6 characters, include letters and numbers",
+                  },
+                })}
               />
-              <label className="label">
-                <a href="#" className="label-text-alt link link-hover mt-2">
-                  Forgot password?
-                </a>
-              </label>
+              {errors.password && <p className="text-soft-red text-xs italic mt-2">{errors.password.message}</p>}
             </div>
 
-            {/* error message */}
-            <p>{errors.message}</p>
+            {/* Confirm Password */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Confirm Password</span>
+              </label>
+              <input
+                type="password"
+                placeholder="Confirm your password"
+                className="input input-bordered"
+                {...register("confirmPassword", {
+                  required: "Confirm Password is required",
+                  validate: (value) => value === password || "Passwords do not match",
+                })}
+              />
+              {errors.confirmPassword && <p className="text-soft-red text-xs italic mt-2">{errors.confirmPassword.message}</p>}
+            </div>
 
-            {/* submit btn */}
+            {/* Submit Button */}
             <div className="form-control mt-6">
               <input
                 type="submit"
@@ -130,7 +138,7 @@ const Register = () => {
               />
             </div>
 
-            {/* close btn */}
+            {/* Close Button */}
             <Link to="/">
               <div
                 className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
@@ -146,20 +154,6 @@ const Register = () => {
               </Link>
             </div>
           </form>
-          <div className="text-center space-x-3">
-            <button
-              onClick={handleRegister}
-              className="btn btn-circle hover:bg-primary hover:text-white"
-            >
-              <FaGoogle />
-            </button>
-            <button className="btn btn-circle hover:bg-primary hover:text-white">
-              <FaFacebookF />
-            </button>
-            <button className="btn btn-circle hover:bg-primary hover:text-white">
-              <FaGithub />
-            </button>
-          </div>
         </div>
       </div>
     </div>

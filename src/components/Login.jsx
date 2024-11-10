@@ -5,14 +5,12 @@ import { useForm } from "react-hook-form";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import useAuth from "../hooks/useAuth";
 
-
 const Login = () => {
     const [errorMessage, setErrorMessage] = useState("");
     const { signInWithGmail, login } = useAuth();
     const axiosPublic = useAxiosPublic();
 
     const navigate = useNavigate();
-
 
     //react hook form
     const {
@@ -45,7 +43,7 @@ const Login = () => {
                 axiosPublic
                     .post("/users", userInfo)
                     .then((response) => {
-                        console.log(response);
+                        // console.log(response);
                         alert("Login successful!");
                     });
                 navigate("/", { state: { message: '🦄 Login successful!' } });
@@ -80,8 +78,15 @@ const Login = () => {
                                 type="email"
                                 placeholder="Enter your email"
                                 className="input input-bordered"
-                                {...register("email")}
+                                {...register("email", {
+                                    required: "Email is required",
+                                    pattern: {
+                                        value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                                        message: "Invalid email address",
+                                    },
+                                })}
                             />
+                            {errors.email && <p className="text-soft-red text-xs italic mt-2">{errors.email.message}</p>}
                         </div>
 
                         {/* password */}
@@ -93,8 +98,15 @@ const Login = () => {
                                 type="password"
                                 placeholder="Enter your password"
                                 className="input input-bordered"
-                                {...register("password", { required: true })}
+                                {...register("password", {
+                                    required: "Password is required",
+                                    pattern: {
+                                        value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
+                                        message: "Password must be at least 6 characters, include letters and numbers",
+                                    },
+                                })}
                             />
+                            {errors.password && <p className="text-soft-red text-xs italic mt-2">{errors.password.message}</p>}
                             <label className="label">
                                 <a href="#" className="label-text-alt link link-hover mt-2">
                                     Forgot password?
@@ -135,15 +147,17 @@ const Login = () => {
                         </p>
                     </form>
                     <div className="text-center space-x-3">
-                        <button onClick={handleLoginWithGoogle} className="btn btn-circle hover:bg-primary hover:text-white">
-                            <FaGoogle />
+                        <button onClick={handleLoginWithGoogle} className="btn btn-neutral text-white">
+                            <FaGoogle /> Login with Google
                         </button>
-                        <button className="btn btn-circle hover:bg-primary hover:text-white">
+
+
+                        {/* <button className="btn btn-circle hover:bg-primary hover:text-white">
                             <FaFacebookF />
                         </button>
                         <button className="btn btn-circle hover:bg-primary hover:text-white">
                             <FaGithub />
-                        </button>
+                        </button> */}
                     </div>
                 </div>
             </div>
