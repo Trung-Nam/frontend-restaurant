@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaUtensils } from "react-icons/fa";
 import { useForm, useFieldArray } from "react-hook-form";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from 'sweetalert2';
+import Waiting from "../../../components/Waiting";
 
 const AddMenu = () => {
+  const [loading, setLoading] = useState(false);
   const { register, handleSubmit, reset, control } = useForm();
   const { fields: ingredientFields, append: addIngredient } = useFieldArray({ control, name: "ingredients" });
   const { fields: instructionFields, append: addInstruction } = useFieldArray({ control, name: "instructions" });
@@ -17,35 +19,55 @@ const AddMenu = () => {
   const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
   const onSubmit = async (data) => {
-    const imageFile = { image: data.image[0] };
-    const hostingImg = await axiosPublic.post(image_hosting_api, imageFile, {
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    });
+    setLoading(true);
+    try {
+      const formData = new FormData();
+      formData.append("image", data.image[0]);
 
-    if (hostingImg.data.success) {
-      const menuItem = {
-        name: data.name,
-        description: data.description,
-        category: data.category,
-        price: parseFloat(data.price),
-        image: hostingImg.data.data.display_url,
-        ingredients: data.ingredients,
-        instructions: data.instructions.map(inst => ({ description: inst.description })),
-      };
+      // Upload image
+      const hostingImg = await axiosPublic.post(image_hosting_api, formData, {
+        headers: { "content-type": "multipart/form-data" },
+      });
 
-      const postMenuItem = await axiosSecure.post('/menu', menuItem);
-      if (postMenuItem) {
-        reset();
+      if (hostingImg.data.success) {
+        const menuItem = {
+          name: data.name,
+          description: data.description,
+          category: data.category,
+          price: parseFloat(data.price),
+          image: hostingImg.data.data.display_url,
+          ingredients: data.ingredients,
+          instructions: data.instructions.map(inst => ({ description: inst.description })),
+        };
+
+        const postMenuItem = await axiosSecure.post('/menu', menuItem);
+        if (postMenuItem) {
+          reset();
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Your Item is inserted successfully!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      } else {
         Swal.fire({
           position: "center",
-          icon: "success",
-          title: "Your Item is inserted successfully!",
-          showConfirmButton: false,
-          timer: 1500,
+          icon: "error",
+          title: "Failed to upload image",
+          showConfirmButton: true,
         });
       }
+    } catch (error) {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "An error occurred. Please try again.",
+        showConfirmButton: true,
+      });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -108,6 +130,7 @@ const AddMenu = () => {
             </label>
             <input
               type="number"
+              step="0.1"
               {...register("price", { required: true })}
               placeholder="Price"
               className="input input-bordered w-full"
@@ -172,12 +195,12 @@ const AddMenu = () => {
           </button>
         </div>
 
-
-
         <button className="btn bg-primary text-white px-6">
           Add Item <FaUtensils />
         </button>
       </form>
+      {/* Show Loading Overlay when loading */}
+      {loading && <Waiting />}
     </div>
   );
 };

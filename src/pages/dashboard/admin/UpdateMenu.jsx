@@ -122,6 +122,7 @@ const UpdateMenu = () => {
                             </label>
                             <input
                                 type="number"
+                                step="0.1"
                                 {...register("price", { required: true })}
                                 placeholder="Price"
                                 className="input input-bordered w-full"
