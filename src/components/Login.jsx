@@ -108,9 +108,9 @@ const Login = () => {
                             />
                             {errors.password && <p className="text-soft-red text-xs italic mt-2">{errors.password.message}</p>}
                             <label className="label">
-                                <a href="#" className="label-text-alt link link-hover mt-2">
+                                <Link to={'/forget-password'} className="label-text-alt link link-hover mt-2 text-soft-red">
                                     Forgot password?
-                                </a>
+                                </Link>
                             </label>
                         </div>
 

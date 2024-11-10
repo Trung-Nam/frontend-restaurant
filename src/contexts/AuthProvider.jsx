@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react'
-import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from "../firebase/firebase.config"
 import axios from 'axios';
 
@@ -38,6 +38,11 @@ const AuthProvider = ({ children }) => {
             displayName: name, photoURL: photoURL
         })
     }
+
+    const resetPassword = (email) => {
+        return sendPasswordResetEmail(auth, email);
+    };
+
 
     // check signed-in user
     useEffect(() => {
@@ -103,7 +108,8 @@ const AuthProvider = ({ children }) => {
         signInWithGmail,
         login,
         logout,
-        updateUserProfile
+        updateUserProfile,
+        resetPassword
     }
 
     return (
