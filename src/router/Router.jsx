@@ -16,6 +16,7 @@ import Payment from "../pages/shop/Payment";
 import Order from "../pages/dashboard/Order";
 import FoodDetails from "../pages/shop/FoodDetails";
 import Favorites from "../components/Favorites";
+import ForgetPassword from "../components/ForgetPassword";
 
 
 const router = createBrowserRouter([
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
     {
         path: "/register",
         element: <Register />
+    },
+    {
+        path: "/forget-password",
+        element: <ForgetPassword />
     },
     {
         path: "/dashboard",
