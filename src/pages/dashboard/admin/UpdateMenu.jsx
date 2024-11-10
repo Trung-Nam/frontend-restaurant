@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import useAxiosPublic from '../../../hooks/useAxiosPublic';
 import { useForm, useFieldArray } from 'react-hook-form';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { FaUtensils } from 'react-icons/fa';
+import Waiting from '../../../components/Waiting';
 
 const UpdateMenu = () => {
     const item = useLoaderData();
+    const [loading, setLoading] = useState(false);
     const { register, handleSubmit, reset, control } = useForm({
         defaultValues: {
             name: item.name,
@@ -32,34 +34,46 @@ const UpdateMenu = () => {
     const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
     const onSubmit = async (data) => {
-        const imageFile = { image: data.image[0] };
-        const hostingImg = await axiosPublic.post(image_hosting_api, imageFile, {
-            headers: { "content-type": "multipart/form-data" }
-        });
+        setLoading(true);
+        try {
+            const imageFile = { image: data.image[0] };
+            const hostingImg = await axiosPublic.post(image_hosting_api, imageFile, {
+                headers: { "content-type": "multipart/form-data" }
+            });
 
-        if (hostingImg.data.success) {
-            const menuItem = {
-                name: data.name,
-                description: data.description,
-                category: data.category,
-                price: parseFloat(data.price),
-                image: hostingImg.data.data.display_url,
-                ingredients: data.ingredients,
-                instructions: data.instructions.map(instruction => ({ description: instruction.description }))
-            };
+            if (hostingImg.data.success) {
+                const menuItem = {
+                    name: data.name,
+                    description: data.description,
+                    category: data.category,
+                    price: parseFloat(data.price),
+                    image: hostingImg.data.data.display_url,
+                    ingredients: data.ingredients,
+                    instructions: data.instructions.map(instruction => ({ description: instruction.description }))
+                };
 
-            const postMenuItem = await axiosSecure.patch(`/menu/${item._id}`, menuItem);
-            if (postMenuItem) {
-                reset();
-                Swal.fire({
-                    position: "center",
-                    icon: "success",
-                    title: "Your item updated successfully!",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                navigate("/dashboard/manage-items");
+                const postMenuItem = await axiosSecure.patch(`/menu/${item._id}`, menuItem);
+                if (postMenuItem) {
+                    reset();
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Your item updated successfully!",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    navigate("/dashboard/manage-items");
+                }
             }
+        } catch (error) {
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "An error occurred. Please try again.",
+                showConfirmButton: true,
+            });
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -193,6 +207,8 @@ const UpdateMenu = () => {
                         Update Item <FaUtensils />
                     </button>
                 </form>
+                {/* Show Loading Overlay */}
+                {loading && <Waiting />}
             </div>
         </div>
     );
