@@ -1,0 +1,14 @@
+{
+    "headers": [
+      {
+        "source": "/(.*)",
+        "headers": [
+          {
+            "key": "Content-Security-Policy",
+            "value": "script-src 'self' https://js.stripe.com https://www.googletagmanager.com;"
+          }
+        ]
+      }
+    ]
+  }
+  
