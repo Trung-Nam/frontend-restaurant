@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import Card from '../../components/Card'
+import React, { useEffect, useState } from 'react';
+import Card from '../../components/Card';
 import { FaFilter, FaSearch } from 'react-icons/fa';
+import useMenu from '../../hooks/useMenu';
 
 const Menu = () => {
-    const [menu, setMenu] = useState([]);
+    const [menu] = useMenu();
     const [filteredItems, setFilteredItems] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('all');
     const [sortOption, setSortOption] = useState('default');
@@ -11,27 +12,16 @@ const Menu = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const itemsPerPage = 8;
 
-    const categories = ["all", ...new Set(menu.map(item => item.category))];
+    const categories = ["all", ...new Set(menu.map(item => item.category.name))];
 
+    // Initialize filteredItems with all menu items when menu changes
     useEffect(() => {
-        fetchData();
-    }, []);
-
-    // Fetch data from the backend
-    const fetchData = async () => {
-        try {
-            const response = await fetch("https://backend-restaurant-b5d2.onrender.com/menu");
-            const data = await response.json();
-            setMenu(data);
-            setFilteredItems(data);
-        } catch (error) {
-            console.error("Error fetching data:", error);
-        }
-    };
+        setFilteredItems(menu);
+    }, [menu]);
 
     // Filtering items by category
     const filterItems = (category) => {
-        const filtered = category === "all" ? menu : menu.filter((item) => item.category === category);
+        const filtered = category === "all" ? menu : menu.filter((item) => item.category.name === category);
         setFilteredItems(filtered);
         setSelectedCategory(category);
         setCurrentPage(1);

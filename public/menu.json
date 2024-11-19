@@ -3,7 +3,10 @@
     "name": "Haddock Niçoise Salad",
     "description": "Chargrilled fresh tuna steak (served medium rare) on classic Niçoise salad with French beans.",
     "image": "https://images.unsplash.com/photo-1552767303-1da9f283eb35?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "category": "Salad",
+    "category": {
+      "name": "Salad",
+      "image": "/images/home/category/img5.png"
+    },
     "price": 14.7,
     "ingredients": [
       {
@@ -57,7 +60,10 @@
     "name": "Margherita Pizza",
     "description": "Classic Margherita pizza with fresh mozzarella, tomatoes, and basil.",
     "image": "https://media.istockphoto.com/id/1312807757/photo/real-neapolitan-italian-pizza-called-margherita-pizza-just-out-of-the-oven.webp?a=1&b=1&s=612x612&w=0&k=20&c=xjkQY7Yz4GnJnqFCImn97XvM8u-GxpcXfU5c3_WnPX8=",
-    "category": "Pizza",
+    "category": {
+      "name": "Pizza",
+      "image": "/images/home/category/img2.png"
+    },
     "price": 11.5,
     "ingredients": [
       {
@@ -95,7 +101,10 @@
     "name": "Minestrone Soup",
     "description": "A hearty Italian vegetable soup with pasta and beans.",
     "image": "https://media.istockphoto.com/id/1625313276/photo/tasty-minestrone-soup-made-of-legume-and-vegetables.webp?a=1&b=1&s=612x612&w=0&k=20&c=uMigBe_eSQGmzi9Whxs93m5sqtngM_KYsw5aw8CRN0g=",
-    "category": "Soup",
+    "category": {
+      "name": "Soup",
+      "image": "/images/home/category/img6.png"
+    },
     "price": 9.8,
     "ingredients": [
       {
@@ -129,7 +138,10 @@
     "name": "Chocolate Lava Cake",
     "description": "Warm chocolate cake with a molten center, served with vanilla ice cream.",
     "image": "https://media.istockphoto.com/id/1499766130/photo/chocolate-fondant-lava-cake.webp?a=1&b=1&s=612x612&w=0&k=20&c=qXPxHt_8VXDfBjjW1FnZkcNO5rhvs6wKlVcAOF-zWM0=",
-    "category": "Dessert",
+    "category": {
+      "name": "Dessert",
+      "image": "/images/home/category/img3.png"
+    },
     "price": 6.5,
     "ingredients": [
       {
@@ -168,7 +180,10 @@
     "name": "Mango Smoothie",
     "description": "A refreshing mango smoothie blended with yogurt and honey.",
     "image": "https://media.istockphoto.com/id/904617420/photo/fresh-mango-smoothie-in-the-glass.webp?a=1&b=1&s=612x612&w=0&k=20&c=owVY4fKM9_0n5MNTJ32JpUX7R39Uk0OW2v3OToswNi0=",
-    "category": "Drinks",
+    "category": {
+      "name": "Drinks",
+      "image": "/images/home/category/img4.png"
+    },
     "price": 4.5,
     "ingredients": [
       {
@@ -200,7 +215,10 @@
     "name": "BBQ Chicken Wings",
     "description": "Juicy chicken wings coated in a smoky BBQ sauce.",
     "image": "https://media.istockphoto.com/id/1438415993/photo/spicy-grilled-chicken-wings-with-sauce-on-a-wooden-plate-with-tomato-and-herb-on-a-dark.webp?a=1&b=1&s=612x612&w=0&k=20&c=RFtM0LvYFYBe7ShAX9jKf4AscDl5CodfS6RK4Wx0FSc=",
-    "category": "Popular",
+    "category": {
+      "name": "Popular",
+      "image": "/images/home/category/img1.png"
+    },
     "price": 8.9,
     "ingredients": [
       {

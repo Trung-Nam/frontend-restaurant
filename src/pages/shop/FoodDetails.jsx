@@ -191,7 +191,7 @@ const FoodDetails = () => {
             <div className="md:grid grid-cols-5 grid-rows-5 gap-4">
                 <div className="col-span-3 row-span-5 relative">
                     <h3 className="md:text-2xl text-2xl font-semibold py-4 px-2 text-start">
-                        Category: <span className='text-red-500'> {item?.category}</span>
+                        Category: <span className='text-red-500'> {item?.category?.name}</span>
                         <span> - Price: <span className='text-red-500'>${item?.price}</span></span>
                     </h3>
                     <img

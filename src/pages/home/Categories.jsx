@@ -1,12 +1,29 @@
 import React from 'react'
+import useMenu from '../../hooks/useMenu'
 
-const categoryItems = [
-    { id: 1, title: "Main Dish", description: "(86 dishes)", image: "/images/home/category/img1.png" },
-    { id: 2, title: "Break Fast", description: "(12 break fast)", image: "/images/home/category/img2.png" },
-    { id: 3, title: "Dessert", description: "(48 dessert)", image: "/images/home/category/img3.png" },
-    { id: 4, title: "Browse All", description: "(255 Items)", image: "/images/home/category/img4.png" }
-]
 const Categories = () => {
+    const [menu] = useMenu();
+    
+    // Count dishes by category
+    const categoryCounts = menu.reduce((acc, dish) => {
+        const categoryName = dish.category.name;
+
+        if (!acc[categoryName]) {
+            acc[categoryName] = {
+                name: categoryName,
+                count: 0,
+                image: dish.category.image 
+            };
+        }
+
+        acc[categoryName].count += 1;
+
+        return acc; 
+    }, {});
+
+    // Convert object to array
+    const categories = Object.values(categoryCounts);
+
     return (
         <div className='section-container py-16'>
             <div className='text-center'>
@@ -17,17 +34,17 @@ const Categories = () => {
             {/* Categories */}
             <div className='flex flex-col sm:flex-row flex-wrap gap-8 justify-around items-center mt-12'>
                 {
-                    categoryItems.map((item, index) => (
+                    categories?.slice(0, 4)?.map((item, index) => (
                         <div key={index}
                             className='shadow-lg rounded-md bg-white py-6 px-5 w-72 mx-auto
                                 text-center cursor-pointer hover:-translate-y-4 duration-300 transition-all
                             '>
                             <div className='flex w-full mx-auto items-center justify-center'>
-                                <img src={item.image} alt={`category-image-${item.id}`} className='bg-[#C1F1C6] rounded-full w-28 h-28' />
+                                <img src={item.image} alt={`category-image-${item.name}`} className='bg-[#C1F1C6] rounded-full w-28 h-28' />
                             </div>
                             <div className='mt-5 space-y-1'>
-                                <h5 >{item.title}</h5>
-                                <p>{item.description}</p>
+                                <h5 className='font-bold'>{item.name}</h5>
+                                <p>({item.count} dishes)</p>
                             </div>
                         </div>
                     ))
@@ -37,4 +54,4 @@ const Categories = () => {
     )
 }
 
-export default Categories
+export default Categories;
