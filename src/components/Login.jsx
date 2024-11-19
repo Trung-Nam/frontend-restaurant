@@ -33,30 +33,30 @@ const Login = () => {
     };
 
     // Client-side Google login handler with suppressed console log
-    const handleLoginWithGoogle = async () => {
-        try {
-            const result = await signInWithGmail();
-            const userInfo = {
-                name: result.user.displayName,
-                email: result.user.email,
-            };
+    // const handleLoginWithGoogle = async () => {
+    //     try {
+    //         const result = await signInWithGmail();
+    //         const userInfo = {
+    //             name: result.user.displayName,
+    //             email: result.user.email,
+    //         };
 
-            const response = await axiosPublic.post("/users", userInfo);
-            if (response.status === 201) {
-                navigate("/", { state: { message: "🦄 New user created and logged in!" } });
-            } else {
-                navigate("/", { state: { message: "🦄 Logged in!" } });
-            }
-            navigate("/", { state: { message: "🦄 Login successful!" } });
+    //         const response = await axiosPublic.post("/users", userInfo);
+    //         if (response.status === 201) {
+    //             navigate("/", { state: { message: "🦄 New user created and logged in!" } });
+    //         } else {
+    //             navigate("/", { state: { message: "🦄 Logged in!" } });
+    //         }
+    //         navigate("/", { state: { message: "🦄 Login successful!" } });
 
-        } catch (error) {
-            if (error.response && error.response.status === 409) {
-                navigate("/", { state: { message: "🦄 Login successful!" } });
-            } else {
-                alert("An error occurred while logging in.");
-            }
-        }
-    };
+    //     } catch (error) {
+    //         if (error.response && error.response.status === 409) {
+    //             navigate("/", { state: { message: "🦄 Login successful!" } });
+    //         } else {
+    //             alert("An error occurred while logging in.");
+    //         }
+    //     }
+    // };
 
 
 
@@ -155,19 +155,19 @@ const Login = () => {
                             </Link>
                         </p>
                     </form>
-                    <div className="text-center space-x-3">
+                    {/* <div className="text-center space-x-3">
                         <button onClick={handleLoginWithGoogle} className="btn btn-neutral text-white">
                             <FaGoogle /> Login with Google
                         </button>
 
 
-                        {/* <button className="btn btn-circle hover:bg-primary hover:text-white">
+                         <button className="btn btn-circle hover:bg-primary hover:text-white">
                             <FaFacebookF />
                         </button>
                         <button className="btn btn-circle hover:bg-primary hover:text-white">
                             <FaGithub />
-                        </button> */}
-                    </div>
+                        </button> 
+                    </div> */}
                 </div>
             </div>
         </div>
