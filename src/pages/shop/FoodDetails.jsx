@@ -31,7 +31,7 @@ const FoodDetails = () => {
         if (user && user.email) {
             const cartItem = { menuItemId: item._id, name: item.name, quantity: 1, image: item.image, price: item.price, email: user.email }
 
-            axios.post('https://backend-restaurant-b5d2.onrender.com/carts', cartItem)
+            axios.post('http://localhost:6001/carts', cartItem)
                 .then((response) => {
                     if (response) {
                         refetch(); // refetch cart

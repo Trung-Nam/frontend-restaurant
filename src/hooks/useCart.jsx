@@ -10,7 +10,7 @@ const useCart = () => {
         queryKey: ['carts', user?.email],
         queryFn: async () => {
             if (!token) return []; // If no token, return an empty array
-            const res = await fetch(`https://backend-restaurant-b5d2.onrender.com/carts?email=${user?.email}`, {
+            const res = await fetch(`http://localhost:6001/carts?email=${user?.email}`, {
                 headers: {
                     authorization: `Bearer ${token}`,
                 },

@@ -4,9 +4,10 @@ import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../contexts/AuthProvider";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import {toast} from "react-toastify";
 
 const Register = () => {
-  const { signUpWithGmail, createUser, updateUserProfile } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
 
@@ -36,7 +37,7 @@ const Register = () => {
         });
       })
       .catch((error) => {
-        console.log(error.message);
+        toast.error("Email already in used. Please try another email!");
       });
   };
 
