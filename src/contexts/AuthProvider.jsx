@@ -22,9 +22,31 @@ const AuthProvider = ({ children }) => {
     }
 
     // login using gmail and password
-    const login = (email, password) => {
-        return signInWithEmailAndPassword(auth, email, password);
-    }
+    const login = async (email, password) => {
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const token = localStorage.getItem("access-token");
+
+            if (token) {
+                const dbUserResponse = await fetch(`http://localhost:6001/users/${userCredential.user.email}`, {
+                    headers: {
+                        method: 'GET',
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                });
+                const dbUserData = await dbUserResponse.json();
+                console.log(dbUserData);
+
+                setUser(dbUserData);
+            }
+            return userCredential;
+        } catch (error) {
+            console.error('Error logging in:', error);
+            throw error; // Handle the error as needed
+        }
+    };
+    
 
     // logout
     const logout = () => {
@@ -46,9 +68,8 @@ const AuthProvider = ({ children }) => {
     // check signed-in user
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-            setLoading(true); // Set loading to true while fetching data
+            setLoading(true);
             if (currentUser) {
-                const userInfo = { email: currentUser.email };
 
                 // Fetch or set JWT token for API requests
                 const tokenResponse = await fetch('http://localhost:6001/jwt', {
@@ -56,7 +77,7 @@ const AuthProvider = ({ children }) => {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(userInfo),
+                    body: JSON.stringify({ email: currentUser?.email }),
                 });
                 const tokenData = await tokenResponse.json();
 
@@ -64,28 +85,6 @@ const AuthProvider = ({ children }) => {
                     localStorage.setItem("access-token", tokenData.token);
                 }
 
-                // Use the token to authenticate and fetch user data from your database
-                const dbUserResponse = await fetch(`http://localhost:6001/users/admin/${currentUser.email}`, {
-                    headers: {
-                        method: 'GET',
-                        'Authorization': `Bearer ${tokenData.token}`,
-                        'Content-Type': 'application/json'
-                    },
-                });
-                const dbUserData = await dbUserResponse.json();
-
-                // Combine Firebase and database user data
-                const combinedUserData = {
-                    name: currentUser.displayName,
-                    photoURL: currentUser.photoURL,
-                    email: currentUser.email,
-                    role: dbUserData.admin === true ? 'admin' : 'user'
-                };
-                // console.log(currentUser);
-
-                // console.log(combinedUserData);
-
-                setUser(combinedUserData);
             } else {
                 localStorage.removeItem("access-token");
                 setUser(null);

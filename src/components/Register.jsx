@@ -32,7 +32,8 @@ const Register = () => {
           };
           axiosPublic.post("/users", userInfo)
             .then(() => {
-              navigate("/", { state: { message: '🦄 Create account successful!' } });
+              toast.success("Create account successful!");
+              navigate("/login");
             });
         });
       })
