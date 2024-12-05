@@ -36,26 +36,10 @@ const Login = () => {
 
     const handleLoginWithGoogle = async () => {
         try {
-            const result = await signInWithGmail();
-            const userInfo = {
-                name: result.user.displayName,
-                email: result.user.email,
-            };
-
-            const response = await axiosPublic.post("/users", userInfo);
-            if (response.status === 201) {
-                navigate("/", { state: { message: "🦄 New user created and logged in!" } });
-            } else {
-                navigate("/", { state: { message: "🦄 Logged in!" } });
-            }
+            await signInWithGmail();
             navigate("/", { state: { message: "🦄 Login successful!" } });
-
         } catch (error) {
-            if (error.response && error.response.status === 409) {
-                navigate("/", { state: { message: "🦄 Login successful!" } });
-            } else {
-                toast.error("An error occurred while logging in. Try again later.");
-            }
+            toast.error("An error occurred while logging in. Try again later.");
         }
     };
 

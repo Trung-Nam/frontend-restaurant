@@ -1,6 +1,16 @@
-import React, { createContext, useEffect, useState } from 'react'
-import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
-import app from "../firebase/firebase.config"
+import React, { createContext, useEffect, useState } from 'react';
+import { 
+    createUserWithEmailAndPassword, 
+    getAuth, 
+    GoogleAuthProvider, 
+    onAuthStateChanged, 
+    sendPasswordResetEmail, 
+    signInWithEmailAndPassword, 
+    signInWithPopup, 
+    signOut, 
+    updateProfile 
+} from "firebase/auth";
+import app from "../firebase/firebase.config";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
@@ -10,111 +20,140 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    //  Fetch and store JWT token
+    const fetchToken = async (email) => {
+        try {
+            const response = await fetch('http://localhost:6001/jwt', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email }),
+            });
+            const data = await response.json();
+            if (data.token) {
+                localStorage.setItem("access-token", data.token);
+                return data.token;
+            }
+            throw new Error("Failed to fetch token");
+        } catch (error) {
+            console.error('Error fetching token:', error);
+            return null;
+        }
+    };
 
-    // create an account
+    //  Fetch user data from the database
+    const fetchUserData = async (email, token) => {
+        try {
+            const response = await fetch(`http://localhost:6001/users/${email}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+            return null;
+        }
+    };
+
+    // Create a new account
     const createUser = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password);
-    }
+    };
 
-    // signup with gmail
-    const signInWithGmail = () => {
-        return signInWithPopup(auth, googleProvider);
-    }
-
-    // login using gmail and password
+    // Login with email and password
     const login = async (email, password) => {
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
-            const token = localStorage.getItem("access-token");
-
+            const token = await fetchToken(userCredential.user.email);
             if (token) {
-                const dbUserResponse = await fetch(`http://localhost:6001/users/${userCredential.user.email}`, {
-                    headers: {
-                        method: 'GET',
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-                    },
-                });
-                const dbUserData = await dbUserResponse.json();
-                console.log(dbUserData);
-
-                setUser(dbUserData);
+                const userData = await fetchUserData(userCredential.user.email, token);
+                setUser(userData);
+            } else {
+                logoutUser();
             }
             return userCredential;
         } catch (error) {
             console.error('Error logging in:', error);
-            throw error; // Handle the error as needed
+            throw error;
         }
     };
-    
 
-    // logout
-    const logout = () => {
-        return signOut(auth);
-    }
+    // Sign in with Google
+    const signInWithGmail = async () => {
+        try {
+            const userCredential = await signInWithPopup(auth, googleProvider);
+            const token = await fetchToken(userCredential.user.email);
+            if (token) {
+                const userData = await fetchUserData(userCredential.user.email, token);
+                setUser(userData);
+            } else {
+                logoutUser();
+            }
+            return userCredential;
+        } catch (error) {
+            console.error('Error logging in with Google:', error);
+            throw error;
+        }
+    };
 
-    // update profile
+    // Logout
+    const logoutUser = () => {
+        localStorage.removeItem("access-token");
+        setUser(null);
+    };
+
+    const logout = async () => {
+        const result = await signOut(auth);
+        return logoutUser(result);
+    };
+
+    // Update user profile
     const updateUserProfile = (name, photoURL) => {
-        return updateProfile(auth.currentUser, {
-            displayName: name, photoURL: photoURL
-        })
-    }
+        return updateProfile(auth.currentUser, { displayName: name, photoURL });
+    };
 
+    // Reset password
     const resetPassword = (email) => {
         return sendPasswordResetEmail(auth, email);
     };
 
-
-    // check signed-in user
+    // Monitor authentication state
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
             setLoading(true);
             if (currentUser) {
-
-                // Fetch or set JWT token for API requests
-                const tokenResponse = await fetch('http://localhost:6001/jwt', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ email: currentUser?.email }),
-                });
-                const tokenData = await tokenResponse.json();
-
-                if (tokenData.token) {
-                    localStorage.setItem("access-token", tokenData.token);
+                const token = await fetchToken(currentUser.email);
+                if (token) {
+                    const userData = await fetchUserData(currentUser.email, token);
+                    setUser(userData);
                 }
-
             } else {
-                localStorage.removeItem("access-token");
-                setUser(null);
+                logoutUser();
             }
-
             setLoading(false);
         });
-
         return () => unsubscribe();
     }, []);
 
-
-
-
+    // Auth context value
     const authInfo = {
         user,
         loading,
         createUser,
-        signInWithGmail,
         login,
+        signInWithGmail,
         logout,
         updateUserProfile,
-        resetPassword
-    }
+        resetPassword,
+    };
 
     return (
         <AuthContext.Provider value={authInfo}>
             {children}
         </AuthContext.Provider>
-    )
-}
+    );
+};
 
-export default AuthProvider
+export default AuthProvider;
