@@ -1,20 +1,21 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { 
-    createUserWithEmailAndPassword, 
-    getAuth, 
-    GoogleAuthProvider, 
-    onAuthStateChanged, 
-    sendPasswordResetEmail, 
-    signInWithEmailAndPassword, 
-    signInWithPopup, 
-    signOut, 
-    updateProfile 
+import {
+    createUserWithEmailAndPassword,
+    getAuth,
+    GoogleAuthProvider,
+    onAuthStateChanged,
+    sendPasswordResetEmail,
+    signInWithEmailAndPassword,
+    signInWithPopup,
+    signOut
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
+import { toast } from 'react-toastify';
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
+
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -110,9 +111,34 @@ const AuthProvider = ({ children }) => {
     };
 
     // Update user profile
-    const updateUserProfile = (name, photoURL) => {
-        return updateProfile(auth.currentUser, { displayName: name, photoURL });
+    const updateUserProfile = async (user, data) => {
+        try {
+            const token = await fetchToken(user?.email);
+            if (token) {
+                const response = await fetch(`http://localhost:6001/users/${user?._id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                if (!response.ok) {
+                    throw new Error("Failed to update user profile");
+                }
+
+                const result = await response.json();
+
+                return result;
+            }
+
+        } catch (error) {
+            toast.error("Update information failed");
+            console.error(error); // Use a console for debugging
+        }
     };
+
 
     // Reset password
     const resetPassword = (email) => {
@@ -147,6 +173,7 @@ const AuthProvider = ({ children }) => {
         logout,
         updateUserProfile,
         resetPassword,
+        setUser
     };
 
     return (
