@@ -35,7 +35,7 @@ const router = createBrowserRouter([
             {
                 path: "/menu/:id",
                 element: <FoodDetails />,
-                loader: ({ params }) => fetch(`https://backend-restaurant-b5d2.onrender.com/menu/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:6001/menu/${params.id}`)
             },
             {
                 path: "/user-profile",
@@ -94,7 +94,7 @@ const router = createBrowserRouter([
             {
                 path: "update-menu/:id",
                 element: <UpdateMenu />,
-                loader: ({ params }) => fetch(`https://backend-restaurant-b5d2.onrender.com/menu/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:6001/menu/${params.id}`)
             },
 
         ]

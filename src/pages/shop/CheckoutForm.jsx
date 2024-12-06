@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import useAuth from '../../hooks/useAuth'
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 const CheckoutForm = ({ cart, price }) => {
     const { user } = useAuth();
     const stripe = useStripe();
@@ -14,15 +15,9 @@ const CheckoutForm = ({ cart, price }) => {
 
 
     useEffect(() => {
-        if (typeof price !== "number" || price < 1) {
-            console.log("Price is not a number or less than 1");
-
-            return;
-        }
-
-        axiosSecure.post("/create-payment-intent", { price })
+        axiosSecure.post("/create-payment-intent", { price: Math.floor(price * 100) })
             .then((response) => {
-                console.log(response.data.clientSecret);
+                // console.log(response.data.clientSecret);
                 setClientSecret(response.data.clientSecret);
             })
     }, [price, axiosSecure])
@@ -78,7 +73,7 @@ const CheckoutForm = ({ cart, price }) => {
         if (confirmError) {
             console.log(confirmError);
         }
-        console.log(paymentIntent);
+        // console.log(paymentIntent);
         if (paymentIntent.status === 'succeeded') {
             setCartError(`Your transactionId is ${paymentIntent.id}`);
 
@@ -91,31 +86,62 @@ const CheckoutForm = ({ cart, price }) => {
                 itemName: cart.map(item => item.name),
                 cartItems: cart.map(item => item._id),
                 menuItems: cart.map(item => item.menuItemId),
-            }
+            };
 
             // console.log(paymentInfo);
             // send info to BE
 
             axiosSecure.post('/payments', paymentInfo)
-            .then(res => {
-                // console.log(res.data);
-                alert('Payment successfully!')
-                navigate('/order')
+                .then(res => {
+                    // console.log(res.data);
+                    toast.success('Payment successfully!');
+                    navigate('/order')
 
-            })
+                })
         }
 
     };
 
     return (
         <div className='section-container px-8 flex flex-col sm:flex-row justify-start items-center gap-8'>
-            <div className="md:w-1/2 w-full space-y-3">
-                <h4 className="text-lg font-semibold">Order Summary</h4>
-                <p>Number of items: {cart?.length}</p>
-                <p>Total Price: {price}</p>
+            <div className="md:w-2/3 w-full space-y-3">
+                <div className="my-24">
+                    <h2 className="font-bold mb-6 text-2xl text-center">Order Summary</h2>
+                    <table className="min-w-full border-collapse border border-gray-200">
+                        <thead>
+                            <tr>
+                                <th className="border border-gray-300 px-4 py-2 bg-gray-100 text-left">Details</th>
+                                <th className="border border-gray-300 px-4 py-2 bg-gray-100 text-left">Information</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td className="border border-gray-300 px-4 py-2">Customer Name</td>
+                                <td className="border border-gray-300 px-4 py-2">{user?.name}</td>
+                            </tr>
+                            <tr>
+                                <td className="border border-gray-300 px-4 py-2">Customer Email</td>
+                                <td className="border border-gray-300 px-4 py-2">{user?.email}</td>
+                            </tr>
+                            <tr>
+                                <td className="border border-gray-300 px-4 py-2">Customer Address</td>
+                                <td className="border border-gray-300 px-4 py-2"> {user?.address?.street || 'No Address Provided'}, {user?.address?.city || ''}, {user?.address?.country || ''}</td>
+                            </tr>
+                            <tr>
+                                <td className="border border-gray-300 px-4 py-2">Total Items</td>
+                                <td className="border border-gray-300 px-4 py-2">{cart?.length}</td>
+                            </tr>
+                            <tr>
+                                <td className="border border-gray-300 px-4 py-2">Total Price</td>
+                                <td className="border border-gray-300 px-4 py-2">{price.toFixed(2) || 0}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
             </div>
 
-            <div className="md:w-1/2 w-full space-y-5 card shrink-0 max-w-sm shadow-2xl bg-base-100 px-4 py-8">
+            <div className="md:w-1/3 w-full space-y-5 card shrink-0 max-w-sm shadow-2xl bg-base-100 px-4 py-10 mt-12">
                 <h4 className="text-lg font-semibold">Process your payment</h4>
                 <h5>Credit/Debit Card</h5>
 

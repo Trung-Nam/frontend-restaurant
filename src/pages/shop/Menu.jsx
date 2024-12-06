@@ -105,7 +105,7 @@ const Menu = () => {
         <>
             {/* Menu banner */}
             <div className='section-container bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FCFCFC] to-100%'>
-                <div className='py-48 flex flex-col md:flex-row justify-center items-center gap-8'>
+                <div className='pt-36 pb-28 flex flex-col md:flex-row justify-center items-center gap-8'>
                     {/* Text */}
                     <div className='text-center space-y-7 px-4 flex flex-col justify-center items-center'>
                         <h2 className='md:text-5xl text-4xl font-bold md:leading-snug leading-snug'>
@@ -122,7 +122,7 @@ const Menu = () => {
                                 placeholder="Search menu items"
                                 value={searchTerm}
                                 onChange={handleSearch}
-                                className="flex-grow focus:outline-none"
+                                className="flex-grow focus:outline-none p-1"
                             />
                         </div>
                     </div>
@@ -132,13 +132,13 @@ const Menu = () => {
             {/* Menu shop */}
             <div className='section-container'>
                 {/* Filtering and sorting */}
-                <div className='flex flex-col md:flex-row flex-wrap md:justify-between items-center space-y-3 my-8 px-4'>
+                <div className='flex flex-col md:flex-row flex-wrap md:justify-between items-center space-y-3 my-6 px-4'>
                     {/* All categories buttons */}
                     <div className='flex flex-row justify-start md:items-center md:gap-8 gap-4 flex-wrap'>
                         {categories.map((item) => (
                             <button
                                 onClick={() => filterItems(item)}
-                                className={selectedCategory === item ? "active" : ""}
+                                className={`font-semibold ${selectedCategory === item ? "active" : ""}`}
                                 key={item}
                             >
                                 {item.toUpperCase()}
@@ -147,15 +147,15 @@ const Menu = () => {
                     </div>
 
                     {/* Sorting filter */}
-                    <div className="flex justify-end mb-4 rounded-sm">
-                        <div className="bg-primary p-2">
+                    <div className="flex justify-end mb-4">
+                        <div className="bg-primary p-2 rounded-md mr-2">
                             <FaFilter className="text-white h-4 w-4" />
                         </div>
                         <select
                             id="sort"
                             onChange={(e) => handleSortChange(e.target.value)}
                             value={sortOption}
-                            className="bg-white text-black rounded-sm shadow-2xl border-2"
+                            className="bg-white text-black rounded-md shadow-2xl border-2"
                         >
                             <option value="default">Default</option>
                             <option value="A-Z">A-Z</option>
@@ -167,11 +167,15 @@ const Menu = () => {
                 </div>
 
                 {/* Products */}
-                <div className='grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1'>
-                    {currentItems.map((item) => (
-                        <Card key={item._id} item={item} />
-                    ))}
-                </div>
+                {currentItems.length ? (
+                    <div className='grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1'>
+                        {currentItems.map((item) => (
+                            <Card key={item._id} item={item} />
+                        ))}
+                    </div>
+                ) : (
+                    <div className="flex justify-center items-center py-20 text-2xl font-semibold text-primary">Your dishes not found !</div>
+                )}
             </div>
 
             {/* Pagination */}

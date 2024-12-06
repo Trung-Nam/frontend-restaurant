@@ -4,9 +4,10 @@ import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../contexts/AuthProvider";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import {toast} from "react-toastify";
 
 const Register = () => {
-  const { signUpWithGmail, createUser, updateUserProfile } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
 
@@ -20,25 +21,29 @@ const Register = () => {
   const onSubmit = (data) => {
     const email = data.email;
     const password = data.password;
-
+  
     createUser(email, password)
       .then((result) => {
-        const user = result.user;
-        updateUserProfile(data.name, data.photoURL).then(() => {
-          const userInfo = {
-            name: data.name,
-            email: data.email,
-          };
-          axiosPublic.post("/users", userInfo)
-            .then(() => {
-              navigate("/", { state: { message: '🦄 Create account successful!' } });
-            });
-        });
+        const userInfo = {
+          name: data.name,
+          email: data.email,
+        };
+        axiosPublic.post("/users", userInfo)
+          .then(() => {
+            toast.success("Create account successful!");
+            navigate("/");
+          })
+          .catch((error) => {
+            toast.error("Failed to save user information. Please try again!");
+            console.error("Error saving user data:", error);
+          });
       })
       .catch((error) => {
-        console.log(error.message);
+        toast.error("Email already in use. Please try another email!");
+        console.error("Error creating user:", error);
       });
   };
+  
 
 
   // Watch password to compare with confirm password
