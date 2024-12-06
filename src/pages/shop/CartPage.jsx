@@ -38,7 +38,7 @@ const CartPage = () => {
             reverseButtons: true
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:6001/carts/${item._id}`, {
+                fetch(`https://backend-restaurant-b5d2.onrender.com/carts/${item._id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())
@@ -65,7 +65,7 @@ const CartPage = () => {
 
     const handleDecrease = (item) => {
         if (item.quantity > 1) {
-            fetch(`http://localhost:6001/carts/${item._id}`, {
+            fetch(`https://backend-restaurant-b5d2.onrender.com/carts/${item._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json; charset=utf-8'
@@ -93,7 +93,7 @@ const CartPage = () => {
     }
 
     const handleIncrease = (item) => {
-        fetch(`http://localhost:6001/carts/${item._id}`, {
+        fetch(`https://backend-restaurant-b5d2.onrender.com/carts/${item._id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8'
@@ -118,7 +118,7 @@ const CartPage = () => {
 
 
     const handleChangeQuantity = (item, newQuantity) => {
-        fetch(`http://localhost:6001/carts/${item._id}`, {
+        fetch(`https://backend-restaurant-b5d2.onrender.com/carts/${item._id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8'
