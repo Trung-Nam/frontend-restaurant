@@ -24,7 +24,7 @@ const AuthProvider = ({ children }) => {
     //  Fetch and store JWT token
     const fetchToken = async (email) => {
         try {
-            const response = await fetch('http://localhost:6001/jwt', {
+            const response = await fetch('https://backend-restaurant-b5d2.onrender.com/jwt', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email }),
@@ -44,7 +44,7 @@ const AuthProvider = ({ children }) => {
     //  Fetch user data from the database
     const fetchUserData = async (email, token) => {
         try {
-            const response = await fetch(`http://localhost:6001/users/${email}`, {
+            const response = await fetch(`https://backend-restaurant-b5d2.onrender.com/users/${email}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -115,7 +115,7 @@ const AuthProvider = ({ children }) => {
         try {
             const token = await fetchToken(user?.email);
             if (token) {
-                const response = await fetch(`http://localhost:6001/users/${user?._id}`, {
+                const response = await fetch(`https://backend-restaurant-b5d2.onrender.com/users/${user?._id}`, {
                     method: 'PUT',
                     headers: {
                         'Authorization': `Bearer ${token}`,
