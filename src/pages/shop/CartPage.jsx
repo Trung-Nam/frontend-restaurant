@@ -115,6 +115,31 @@ const CartPage = () => {
                 setCartItems(updateCart);
             })
     }
+
+
+    const handleChangeQuantity = (item, newQuantity) => {
+        fetch(`http://localhost:6001/carts/${item._id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+            body: JSON.stringify({ quantity: newQuantity })
+        })
+            .then(res => res.json())
+            .then(data => {
+                const updateCart = cartItems.map((cartItem) => {
+                    if (cartItem.id === item.id) {
+                        return {
+                            ...cartItem,
+                            quantity: newQuantity,
+                        }
+                    }
+                    return cartItem;
+                })
+                refetch();
+                setCartItems(updateCart);
+            })
+    }
     return (
         <div className="section-container">
             {/* banner */}
@@ -172,7 +197,9 @@ const CartPage = () => {
                                                         type="number"
                                                         value={item.quantity}
                                                         className='w-10 mx-2 text-center overflow-hidden text-xl'
-                                                        onChange={() => console.log(item?.quantity)}
+                                                        onChange={(e) => {
+                                                            handleChangeQuantity(item, e.target.value)
+                                                        }}
                                                     />
                                                     <button className="btn btn-md" onClick={() => handleIncrease(item)}>+</button>
                                                 </td>
@@ -196,7 +223,7 @@ const CartPage = () => {
 
                         {/* customer detail */}
                         <div className="my-24">
-                            <h2 className="font-bold mb-4 text-xl">Order Summary</h2>
+                            <h2 className="font-bold mb-6 text-2xl text-center">Order Details</h2>
                             <table className="min-w-full border-collapse border border-gray-200">
                                 <thead>
                                     <tr>

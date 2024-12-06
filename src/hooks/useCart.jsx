@@ -17,7 +17,7 @@ const useCart = () => {
             });
             return res.json();
         },
-        enabled: !!token, // Only run query if token is available
+        enabled: !!token, 
     });
 
     return [cart, refetch];
