@@ -196,7 +196,12 @@ const UserProfile = () => {
                     ) : (
                         <div className="flex justify-between items-center">
                             <span className="ml-1">
-                                {user?.address?.street || 'No Address Provided'}, {user?.address?.city || ''}, {user?.address?.country || ''}
+                                {
+                                    user?.address?.street || user?.address?.city || user?.address?.country
+                                        ? `${user?.address?.street || 'No Address Provided'}, ${user?.address?.city ? `${user?.address?.city}, ` : ''
+                                        }${user?.address?.country || ''}`
+                                        : 'No Address Provided'
+                                }
                             </span>
                             <FaPen
                                 className="cursor-pointer text-gray-500"

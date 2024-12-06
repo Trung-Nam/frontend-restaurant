@@ -21,26 +21,29 @@ const Register = () => {
   const onSubmit = (data) => {
     const email = data.email;
     const password = data.password;
-
+  
     createUser(email, password)
       .then((result) => {
-        const user = result.user;
-        updateUserProfile(data.name, data.photoURL).then(() => {
-          const userInfo = {
-            name: data.name,
-            email: data.email,
-          };
-          axiosPublic.post("/users", userInfo)
-            .then(() => {
-              toast.success("Create account successful!");
-              navigate("/login");
-            });
-        });
+        const userInfo = {
+          name: data.name,
+          email: data.email,
+        };
+        axiosPublic.post("/users", userInfo)
+          .then(() => {
+            toast.success("Create account successful!");
+            navigate("/");
+          })
+          .catch((error) => {
+            toast.error("Failed to save user information. Please try again!");
+            console.error("Error saving user data:", error);
+          });
       })
       .catch((error) => {
-        toast.error("Email already in used. Please try another email!");
+        toast.error("Email already in use. Please try another email!");
+        console.error("Error creating user:", error);
       });
   };
+  
 
 
   // Watch password to compare with confirm password
